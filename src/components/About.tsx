@@ -4,8 +4,8 @@ import Tooltip from './Tooltip';
 
 import HTMLIcon from '../assets/icons/HTML.png';
 import CSSIcon from '../assets/icons/CSS.png';
-import JavaScriptIcon from '../assets/icons/JavaScript.png';
-import TypeScriptIcon from '../assets/icons/TypeScript.png';
+import JavaScriptIcon from '../assets/icons/Javascript.png';
+import TypeScriptIcon from '../assets/icons/Typescript.png';
 import WebGLIcon from '../assets/icons/WebGL.png';
 import TailwindCSS from '../assets/icons/TailwindCSS.png';
 import ThreeJSIcon from '../assets/icons/ThreeJS.png';
@@ -16,10 +16,10 @@ import AdobeAfterEffectsIcon from '../assets/icons/Adobe After Effects.png';
 import AdobePremiereIcon from '../assets/icons/Adobe Premiere Pro.png';
 import AdobePhotoshopIcon from '../assets/icons/Adobe Photoshop.png';
 import ComfyUIIcon from '../assets/icons/ComfyUI.png';
-import TouchDesignerIcon from '../assets/icons/TouchDesigner.png';
+import TouchDesignerIcon from '../assets/icons/Touchdesigner.png';
 import BlenderIcon from '../assets/icons/Blender.png';
 import SplineIcon from '../assets/icons/Spline.png';
-import GitHubIcon from '../assets/icons/GitHub.png';
+import GitHubIcon from '../assets/icons/Github.png';
 import SupabaseIcon from '../assets/icons/Supabase.png';
 import DockerIcon from '../assets/icons/Docker.png';
 
