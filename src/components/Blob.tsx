@@ -33,6 +33,10 @@ const Blob = ({ onClick }: BlobProps) => {
   useFrame(() => {
     if (meshRef.current) {
       const time = clock.current.getElapsedTime();
+      const material = meshRef.current.material as THREE.ShaderMaterial;
+      if (material.uniforms) {
+        material.uniforms.uTime.value = time;
+      }
 
       const geometry = meshRef.current.geometry;
       const positionArray = geometry.attributes.position.array as Float32Array;
