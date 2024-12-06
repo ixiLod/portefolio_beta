@@ -35,7 +35,7 @@ const ParticleSystem = ({ isEjecting }: ParticleSystemProps) => {
       depthWrite: false,
     });
 
-    particlesRef.current = new THREE.Points(geometry, material);
+    (particlesRef.current as THREE.Points | null) = new THREE.Points(geometry, material);
 
     const animate = () => {
       requestAnimationFrame(animate);
@@ -56,10 +56,18 @@ const ParticleSystem = ({ isEjecting }: ParticleSystemProps) => {
 
     animate();
 
+    const particles = particlesRef.current;
+
     return () => {
-      if (particlesRef.current) {
-        particlesRef.current.geometry.dispose();
-        particlesRef.current.material.dispose();
+      if (particles) {
+        particles.geometry.dispose();
+
+        const material = particles.material;
+        if (Array.isArray(material)) {
+          material.forEach((mat) => mat.dispose());
+        } else {
+          material.dispose();
+        }
       }
     };
   }, []);
