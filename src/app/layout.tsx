@@ -18,7 +18,6 @@ export const metadata: Metadata = {
   title: 'ixiLod Portefolio',
   description: 'Découvrez mes créations visuelles.',
   keywords: 'portfolio, créations, visuelles, art, design',
-  authors: [{ name: 'ixiLod' }],
 };
 
 export default function RootLayout({
