@@ -5,11 +5,29 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Html } from '@react-three/drei';
+import { Group } from 'three';
 
 interface Position {
   x: number;
   y: number;
   z: number;
+}
+
+interface ModelData {
+  url: string;
+  label: string;
+  position: [number, number, number];
+}
+
+interface ModelProps {
+  model: Group | null;
+  ref: React.MutableRefObject<Group | null>;
+  position: [number, number, number];
+  index: number;
+  label: string;
+  hoveredIndex: number | null;
+  setHoveredIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  handleClick: (index: number) => void;
 }
 
 const quadraticBezier = (t: number, p0: Position, p1: Position, p2: Position): Position => {
@@ -19,15 +37,85 @@ const quadraticBezier = (t: number, p0: Position, p1: Position, p2: Position): P
   return { x, y, z };
 };
 
-const Networks = () => {
-  const gltfRef1 = useRef<THREE.Group | null>(null);
-  const gltfRef2 = useRef<THREE.Group | null>(null);
-  const gltfRef3 = useRef<THREE.Group | null>(null);
+const Model = ({
+  model,
+  ref,
+  position,
+  index,
+  label,
+  hoveredIndex,
+  setHoveredIndex,
+  handleClick,
+}: ModelProps) => (
+  <>
+    {model && (
+      <>
+        <primitive
+          ref={ref}
+          object={model}
+          scale={[0.2, 0.2, 0.2]}
+          position={position}
+          onPointerOver={() => {
+            setHoveredIndex(index);
+            document.body.style.cursor = 'pointer';
+          }}
+          onPointerOut={() => {
+            setHoveredIndex(null);
+            document.body.style.cursor = 'default';
+          }}
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+            e.stopPropagation();
+            handleClick(index);
+          }}
+        />
+        {hoveredIndex === index && (
+          <Html
+            position={[position[0], position[1] + 0.5, position[2]]}
+            style={{ pointerEvents: 'none' }}
+          >
+            <div
+              style={{
+                color: 'white',
+                background: 'rgba(255, 255, 255, 0.5)',
+                padding: '5px',
+                borderRadius: '5px',
+              }}
+            >
+              {label}
+            </div>
+          </Html>
+        )}
+      </>
+    )}
+  </>
+);
 
+const modelData: ModelData[] = [
+  {
+    url: '/assets/models/instagramLogo.gltf',
+    label: 'Instagram',
+    position: [0, -3, 1],
+  },
+  {
+    url: '/assets/models/linktreeLogo.gltf',
+    label: 'Linktree',
+    position: [0, -3, 1],
+  },
+  {
+    url: '/assets/models/githubLogo.gltf',
+    label: 'Github',
+    position: [0, -3, 1],
+  },
+];
+
+const Networks = () => {
+  const gltfRefs = [
+    useRef<THREE.Group | null>(null),
+    useRef<THREE.Group | null>(null),
+    useRef<THREE.Group | null>(null),
+  ];
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [gltfModel1, setGltfModel1] = useState<THREE.Group | null>(null);
-  const [gltfModel2, setGltfModel2] = useState<THREE.Group | null>(null);
-  const [gltfModel3, setGltfModel3] = useState<THREE.Group | null>(null);
+  const [gltfModels, setGltfModels] = useState<(THREE.Group | null)[]>([null, null, null]);
 
   const positions: Position[] = [
     { x: -0.9, y: 1.1, z: 1 },
@@ -56,59 +144,34 @@ const Networks = () => {
 
   useEffect(() => {
     const loader = new GLTFLoader();
-    loader.load(
-      '/assets/models/instagramLogo.gltf',
-      (gltf: GLTF) => {
-        setGltfModel1(gltf.scene);
-        gltfRef1.current = gltf.scene;
-      },
-      undefined,
-      (error: unknown) => {
-        if (error instanceof Error) {
-          console.error('Error loading the first GLTF model:', error);
-        } else {
-          console.error('An unknown error occurred while loading the first GLTF model.');
-        }
-      }
-    );
 
-    loader.load(
-      '/assets/models/linktreeLogo.gltf',
-      (gltf: GLTF) => {
-        setGltfModel2(gltf.scene);
-        gltfRef2.current = gltf.scene;
-      },
-      undefined,
-      (error: unknown) => {
-        if (error instanceof Error) {
-          console.error('Error loading the second GLTF model:', error);
-        } else {
-          console.error('An unknown error occurred while loading the second GLTF model.');
+    modelData.forEach((model, index) => {
+      loader.load(
+        model.url,
+        (gltf: GLTF) => {
+          setGltfModels((prev) => {
+            const newModels = [...prev];
+            newModels[index] = gltf.scene;
+            return newModels;
+          });
+          gltfRefs[index].current = gltf.scene;
+        },
+        undefined,
+        (error: unknown) => {
+          if (error instanceof Error) {
+            console.error(`Error loading the model from ${model.url}:`, error);
+          } else {
+            console.error(`An unknown error occurred while loading the model from ${model.url}.`);
+          }
         }
-      }
-    );
-
-    loader.load(
-      '/assets/models/githubLogo.gltf',
-      (gltf: GLTF) => {
-        setGltfModel3(gltf.scene);
-        gltfRef3.current = gltf.scene;
-      },
-      undefined,
-      (error: unknown) => {
-        if (error instanceof Error) {
-          console.error('Error loading the third GLTF model:', error);
-        } else {
-          console.error('An unknown error occurred while loading the third GLTF model.');
-        }
-      }
-    );
+      );
+    });
   }, []);
 
   useFrame((state) => {
     const elapsedTime = state.clock.getElapsedTime();
 
-    [gltfRef1, gltfRef2, gltfRef3].forEach((ref, index) => {
+    gltfRefs.forEach((ref, index) => {
       const targetPosition = positions[index];
       const startPosition = startPositions[index];
       const currentPosition = currentPositions.current[index];
@@ -163,123 +226,19 @@ const Networks = () => {
 
   return (
     <>
-      {gltfModel1 && (
-        <>
-          <primitive
-            ref={gltfRef1}
-            object={gltfModel1}
-            scale={[0.2, 0.2, 0.2]}
-            position={[0, -3, 1]}
-            onPointerOver={() => {
-              setHoveredIndex(0);
-              document.body.style.cursor = 'pointer';
-            }}
-            onPointerOut={() => {
-              setHoveredIndex(null);
-              document.body.style.cursor = 'default';
-            }}
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-              e.stopPropagation();
-              handleClick(0);
-            }}
-          />
-          {hoveredIndex === 0 && (
-            <Html
-              position={[positions[0].x, positions[0].y + 0.5, positions[0].z]}
-              style={{ pointerEvents: 'none' }}
-            >
-              <div
-                style={{
-                  color: 'white',
-                  background: 'rgba(255, 255, 255, 0.5)',
-                  padding: '5px',
-                  borderRadius: '5px',
-                }}
-              >
-                Instagram
-              </div>
-            </Html>
-          )}
-        </>
-      )}
-      {gltfModel2 && (
-        <>
-          <primitive
-            ref={gltfRef2}
-            object={gltfModel2}
-            scale={[0.2, 0.2, 0.2]}
-            position={[0, -3, 1]}
-            onPointerOver={() => {
-              setHoveredIndex(1);
-              document.body.style.cursor = 'pointer';
-            }}
-            onPointerOut={() => {
-              setHoveredIndex(null);
-              document.body.style.cursor = 'default';
-            }}
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-              e.stopPropagation();
-              handleClick(1);
-            }}
-          />
-          {hoveredIndex === 1 && (
-            <Html
-              position={[positions[1].x, positions[1].y + 0.5, positions[1].z]}
-              style={{ pointerEvents: 'none' }}
-            >
-              <div
-                style={{
-                  color: 'white',
-                  background: 'rgba(255, 255, 255, 0.5)',
-                  padding: '5px',
-                  borderRadius: '5px',
-                }}
-              >
-                Linktree
-              </div>
-            </Html>
-          )}
-        </>
-      )}
-      {gltfModel3 && (
-        <>
-          <primitive
-            ref={gltfRef3}
-            object={gltfModel3}
-            scale={[0.2, 0.2, 0.2]}
-            position={[0, -3, 1]}
-            onPointerOver={() => {
-              setHoveredIndex(2);
-              document.body.style.cursor = 'pointer';
-            }}
-            onPointerOut={() => {
-              setHoveredIndex(null);
-              document.body.style.cursor = 'default';
-            }}
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-              e.stopPropagation();
-              handleClick(2);
-            }}
-          />
-          {hoveredIndex === 2 && (
-            <Html
-              position={[positions[2].x, positions[2].y + 0.5, positions[2].z]}
-              style={{ pointerEvents: 'none' }}
-            >
-              <div
-                style={{
-                  color: 'white',
-                  background: 'rgba(255, 255, 255, 0.5)',
-                  padding: '5px',
-                  borderRadius: '5px',
-                }}
-              >
-                Github
-              </div>
-            </Html>
-          )}
-        </>
-      )}
+      {modelData.map((model, index) => (
+        <Model
+          key={index}
+          model={gltfModels[index]}
+          ref={gltfRefs[index]}
+          position={model.position}
+          index={index}
+          label={model.label}
+          hoveredIndex={hoveredIndex}
+          setHoveredIndex={setHoveredIndex}
+          handleClick={handleClick}
+        />
+      ))}
     </>
   );
 };

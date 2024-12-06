@@ -17,10 +17,9 @@ const BlobScene = () => {
   const [isParticlesEjected, setParticlesEjected] = useState(false);
 
   useEffect(() => {
-    // Simulate a loading delay
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // Adjust the delay as needed
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);

@@ -18,7 +18,7 @@ const MENU_ITEMS = [
 const Sidebar = ({ isVisible, onMenuClick, activeModal }: SidebarProps) => {
   return (
     <div
-      className={`backdrop-blur-xs fixed inset-x-1/2 bottom-3 z-50 h-16 w-96 translate-x-[-50%] transform rounded-full border-neutral-400 bg-slate-300 bg-opacity-15 text-sm text-white transition-transform duration-300 ${
+      className={`backdrop-blur-xs fixed inset-x-1/2 bottom-3 z-50 h-16 w-96 translate-x-[-50%] transform rounded-full border-neutral-400 bg-slate-300 bg-opacity-10 text-sm text-white transition-transform duration-300 ${
         isVisible ? 'translate-y-0' : 'translate-y-full'
       }`}
     >
