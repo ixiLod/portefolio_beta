@@ -48,7 +48,7 @@ const BlobScene = () => {
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1.5} />
         <pointLight position={[-5, -5, -5]} intensity={1} />
-        <hemisphereLight skyColor={0xffffff} groundColor={0x444444} intensity={0.5} />
+        <hemisphereLight color={0xffffff} groundColor={0x444444} intensity={0.5} />
         <Blob onClick={handleBlobClick} />
         <ParticleSystem isEjecting={isParticlesEjected} />
         {activeModal === 'networks' && <Networks />}
