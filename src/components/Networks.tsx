@@ -158,14 +158,7 @@ const Networks = () => {
       'https://linktr.ee/ixilod',
       'https://github.com/ixilod',
     ];
-
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    if (isMobile) {
-      window.location.href = urls[index];
-    } else {
-      window.open(urls[index], '_blank');
-    }
+    window.open(urls[index], '_blank');
   };
 
   return (
