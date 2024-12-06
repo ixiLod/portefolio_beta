@@ -63,8 +63,12 @@ const Networks = () => {
         gltfRef1.current = gltf.scene;
       },
       undefined,
-      (error: Error) => {
-        console.error('Error loading the first GLTF model:', error);
+      (error: unknown) => {
+        if (error instanceof Error) {
+          console.error('Error loading the first GLTF model:', error);
+        } else {
+          console.error('An unknown error occurred while loading the first GLTF model.');
+        }
       }
     );
 
@@ -75,8 +79,12 @@ const Networks = () => {
         gltfRef2.current = gltf.scene;
       },
       undefined,
-      (error: Error) => {
-        console.error('Error loading the second GLTF model:', error);
+      (error: unknown) => {
+        if (error instanceof Error) {
+          console.error('Error loading the second GLTF model:', error);
+        } else {
+          console.error('An unknown error occurred while loading the second GLTF model.');
+        }
       }
     );
 
@@ -87,8 +95,12 @@ const Networks = () => {
         gltfRef3.current = gltf.scene;
       },
       undefined,
-      (error: Error) => {
-        console.error('Error loading the third GLTF model:', error);
+      (error: unknown) => {
+        if (error instanceof Error) {
+          console.error('Error loading the third GLTF model:', error);
+        } else {
+          console.error('An unknown error occurred while loading the third GLTF model.');
+        }
       }
     );
   }, []);
