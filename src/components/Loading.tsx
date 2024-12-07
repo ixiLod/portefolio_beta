@@ -11,8 +11,8 @@ const Loading = () => {
       <div className="loader"></div>
       <style jsx>{`
         .loader {
-          border: 5px solid #111;
-          border-top: 10px solid #222;
+          border: 6px solid #111;
+          border-top: 7px solid #222;
           border-radius: 50%;
           width: 120px;
           height: 120px;
