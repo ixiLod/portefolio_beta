@@ -18,12 +18,12 @@ const MENU_ITEMS = [
 const Sidebar = ({ isVisible, onMenuClick, activeModal }: SidebarProps) => {
   return (
     <div
-      className={`fixed inset-x-0 bottom-3 z-50 h-16 w-full xs:w-96 transform rounded-full border-neutral-400 bg-slate-300 bg-opacity-10 text-sm text-white transition-transform duration-300 ${
+      className={`fixed inset-x-0 bottom-3 z-50 h-16 w-full transform rounded-full border-neutral-400 bg-slate-300 bg-opacity-10 text-sm text-white transition-transform duration-300 xs:w-96 ${
         isVisible ? 'translate-y-0' : 'translate-y-full'
-      } flex items-center justify-center mx-auto`}
+      } mx-auto flex items-center justify-center`}
     >
       <motion.h2
-        className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-ninna text-base xs:text-xl text-gray-300 shadow-lg"
+        className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-ninna text-base text-gray-300 shadow-lg xs:text-xl"
         initial={{ opacity: 1 }}
         animate={{ opacity: isVisible ? 0 : 1 }}
         transition={{ duration: 0.3 }}
