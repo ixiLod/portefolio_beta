@@ -18,12 +18,12 @@ const MENU_ITEMS = [
 const Sidebar = ({ isVisible, onMenuClick, activeModal }: SidebarProps) => {
   return (
     <div
-      className={`backdrop-blur-xs fixed inset-x-1/2 bottom-3 z-50 h-16 w-96 translate-x-[-50%] transform rounded-full border-neutral-400 bg-slate-300 bg-opacity-10 text-sm text-white transition-transform duration-300 ${
+      className={`fixed inset-x-0 bottom-3 z-50 h-16 w-full xs:w-96 transform rounded-full border-neutral-400 bg-slate-300 bg-opacity-10 text-sm text-white transition-transform duration-300 ${
         isVisible ? 'translate-y-0' : 'translate-y-full'
-      }`}
+      } flex items-center justify-center mx-auto`}
     >
       <motion.h2
-        className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-ninna text-xl text-gray-300 shadow-lg"
+        className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-ninna text-base xs:text-xl text-gray-300 shadow-lg"
         initial={{ opacity: 1 }}
         animate={{ opacity: isVisible ? 0 : 1 }}
         transition={{ duration: 0.3 }}
@@ -51,7 +51,7 @@ const Sidebar = ({ isVisible, onMenuClick, activeModal }: SidebarProps) => {
                   }}
                   className={`flex items-center transition-colors hover:text-gray-300 ${
                     activeModal === trigger ? 'text-white' : 'text-gray-400'
-                  } ${trigger === 'creations' ? 'line-through' : ''}`}
+                  } ${trigger === 'creations' ? 'line-through' : ''} text-xs xs:text-sm`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.9 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 10 }}

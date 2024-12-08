@@ -2,18 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
-} */
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
-
 @font-face {
   font-family: 'Ninna';
   src: url('./fonts/Ninna-TRIAL.otf') format('opentype');
@@ -31,7 +19,6 @@
 body {
   color: #ededed;
   background: #0a0a0a;
-  /* font-family: Arial, Helvetica, sans-serif; */
 }
 
 .text-shadow {

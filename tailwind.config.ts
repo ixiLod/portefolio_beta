@@ -18,6 +18,9 @@ const config: Config = {
         ninna: ['Ninna', 'sans-serif'],
         neuemontreal: ['NeueMontreal', 'sans-serif'],
       },
+      screens: {
+        xs: '380px',
+      },
     },
   },
   plugins: [],
