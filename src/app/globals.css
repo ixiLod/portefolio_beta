@@ -24,7 +24,3 @@ body {
 .text-shadow {
   text-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
 }
-
-.backdrop-blur-xs {
-  backdrop-filter: blur(2.5px);
-}
