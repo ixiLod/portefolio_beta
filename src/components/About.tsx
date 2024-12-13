@@ -39,7 +39,7 @@ const ICONS = {
     { src: WebGLIcon, alt: 'WebGL' },
   ],
 
-  outils: [
+  tools: [
     { src: AdobePremiereIcon, alt: 'Adobe Premiere' },
     { src: AdobeAfterEffectsIcon, alt: 'Adobe After Effects' },
     { src: AdobePhotoshopIcon, alt: 'Adobe Photoshop' },
@@ -81,7 +81,7 @@ const About = ({ onClose }: ModalProps) => {
       >
         <div className="flex items-start justify-between">
           <h2 id="about-title" className="my-4 px-2 font-ninna text-xl font-bold text-gray-300">
-            À propos
+            About
           </h2>
           <button
             onClick={onClose}
@@ -93,19 +93,18 @@ const About = ({ onClose }: ModalProps) => {
         </div>
         <div className="mt-4 space-y-4 px-6 font-neuemontreal text-gray-300">
           <p>
-            Autodidacte passionné par les arts visuels, la musique, et la programmation, j&apos;ai
-            la conviction que les arts et la technologie sont intimement liés.
-            <br />
-            Mon objectif est de combiner ces passions pour créer des expériences visuelles uniques
-            et captivantes, qu&apos;il s&apos;agisse d&apos;installations ou de vidéos interactives,
-            de sites web artistiques ou d&apos;autres formes d&apos;expression créative.
+            Self-taught and passionate about visual arts, music, and programming, I am deeply
+            convinced that art and technology are intimately connected. My goal is to combine these
+            passions to create unique and captivating visual experiences, whether through
+            installations or interactive videos, artistic websites, or other forms of creative
+            expression.
           </p>
         </div>
 
         {Object.entries(ICONS).map(([section, icons]) => (
           <div key={section}>
             <h3 className="mt-8 px-3 font-ninna font-semibold text-gray-300">
-              {`Mes ${section} :`}
+              {`My ${section} :`}
             </h3>
             <div className="mb-4 mt-2 flex flex-wrap gap-2 px-6">
               {icons.map(({ src, alt }) => (

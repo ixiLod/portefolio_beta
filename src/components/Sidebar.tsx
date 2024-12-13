@@ -9,16 +9,16 @@ interface SidebarProps {
 }
 
 const MENU_ITEMS = [
-  { title: 'À propos', trigger: 'about' },
-  { title: 'Mes créations', trigger: 'creations' },
-  { title: 'Mes réseaux', trigger: 'networks' },
+  { title: 'About', trigger: 'about' },
+  { title: 'My Creations', trigger: 'creations' },
+  { title: 'My Socials', trigger: 'networks' },
   { title: 'Contact', trigger: 'contact', isMail: true },
 ];
 
 const Sidebar = ({ isVisible, onMenuClick, activeModal }: SidebarProps) => {
   return (
     <div
-      className={`fixed inset-x-0 bottom-3 z-50 h-16 w-full transform rounded-full border-neutral-400 bg-slate-300 bg-opacity-10 text-sm text-white backdrop-blur-sm transition-transform duration-300 xs:w-96 ${
+      className={`fixed inset-x-0 bottom-3 z-50 h-16 w-80 transform rounded-full border-neutral-400 bg-slate-300 bg-opacity-10 text-sm text-white backdrop-blur-sm transition-transform duration-300 xs:w-86 ${
         isVisible ? 'translate-y-0' : 'translate-y-full'
       } mx-auto flex items-center justify-center`}
     >

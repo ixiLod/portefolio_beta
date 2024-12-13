@@ -21,6 +21,9 @@ const config: Config = {
       screens: {
         xs: '380px',
       },
+      width: {
+        '86': '22rem',
+      },
     },
   },
   plugins: [],
