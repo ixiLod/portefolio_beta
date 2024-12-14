@@ -12,7 +12,7 @@ const MENU_ITEMS = [
   { title: 'About', trigger: 'about' },
   { title: 'My Creations', trigger: 'creations' },
   { title: 'My Socials', trigger: 'networks' },
-  { title: 'Contact', trigger: 'contact', isMail: true },
+  { title: 'Contact', trigger: 'contact' },
 ];
 
 const Sidebar = ({ isVisible, onMenuClick, activeModal }: SidebarProps) => {
@@ -39,15 +39,11 @@ const Sidebar = ({ isVisible, onMenuClick, activeModal }: SidebarProps) => {
       >
         <nav aria-label="Menu de navigation principale">
           <ul className="flex items-center">
-            {MENU_ITEMS.map(({ title, trigger, isMail }) => (
+            {MENU_ITEMS.map(({ title, trigger }) => (
               <li className="mx-2 flex items-center" key={trigger}>
                 <motion.button
                   onClick={() => {
-                    if (isMail) {
-                      window.location.href = `mailto:ixilod@proton.me`;
-                    } else {
-                      onMenuClick(trigger);
-                    }
+                    onMenuClick(trigger);
                   }}
                   className={`flex items-center transition-colors hover:text-gray-300 ${
                     activeModal === trigger ? 'text-white' : 'text-gray-400'

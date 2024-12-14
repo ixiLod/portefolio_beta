@@ -85,7 +85,7 @@ const About = ({ onClose }: ModalProps) => {
           </h2>
           <button
             onClick={onClose}
-            className="text-white transition duration-300 ease-in-out hover:text-gray-400"
+            className="-translate-y-2 translate-x-2 text-white transition duration-300 ease-in-out hover:text-gray-400"
             aria-label="Fermer la fenêtre À propos"
           >
             <FontAwesomeIcon icon={faCircleXmark} className="text-2xl opacity-10" />

@@ -8,6 +8,7 @@ import ParticleSystem from './ParticleSystem';
 import About from './About';
 import Creations from './Creations';
 import Networks from './Networks';
+import Contact from './Contact';
 import Loading from './Loading';
 
 const BlobScene = () => {
@@ -60,6 +61,7 @@ const BlobScene = () => {
       />
       {activeModal === 'about' && <About onClose={closeModal} />}
       {activeModal === 'creations' && <Creations />}
+      {activeModal === 'contact' && <Contact onClose={closeModal} />}
     </>
   );
 };
