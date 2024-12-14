@@ -63,7 +63,7 @@ const Contact = ({ onClose }: ModalProps) => {
           </button>
           <button
             onClick={onClose}
-            className="-translate-y-2 translate-x-2 text-white transition duration-300 ease-in-out hover:text-gray-400"
+            className="-translate-y-3 translate-x-3 text-white transition duration-300 ease-in-out hover:text-gray-400"
             aria-label="Close the About window"
           >
             <FontAwesomeIcon icon={faCircleXmark} className="text-2xl opacity-10" />
