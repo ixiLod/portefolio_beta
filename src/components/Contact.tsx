@@ -9,7 +9,6 @@ interface ModalProps {
 }
 
 const Contact = ({ onClose }: ModalProps) => {
-  const [copied, setCopied] = useState(false);
   const [emailDisplay, setEmailDisplay] = useState('ixilod@proton.me');
   const email = 'ixilod@proton.me';
 
@@ -17,13 +16,11 @@ const Contact = ({ onClose }: ModalProps) => {
     try {
       await navigator.clipboard.writeText(email);
       setEmailDisplay('Copied!');
-      setCopied(true);
       setTimeout(() => {
         setEmailDisplay(email);
-        setCopied(false);
       }, 2000);
     } catch (err) {
-      console.error('Échec de la copie', err);
+      console.error('fail to copy', err);
     }
   };
 
