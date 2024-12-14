@@ -36,7 +36,7 @@ const Contact = ({ onClose }: ModalProps) => {
       aria-modal="true"
     >
       <motion.div
-        className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg p-4 shadow-lg md:w-3/4"
+        className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-lg p-4 shadow-lg md:w-3/4"
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         initial={{ scale: 0.5, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -44,10 +44,10 @@ const Contact = ({ onClose }: ModalProps) => {
         transition={{ type: 'spring', damping: 20, stiffness: 300, duration: 0.4 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="m-1 flex items-start justify-between">
+        <div className="m-1 ml-4 flex items-start justify-between">
           <button
             onClick={handleCopy}
-            className="flex min-w-[200px] items-center justify-center rounded-md border-2 border-dashed border-gray-300 p-2 text-gray-300 transition duration-300 ease-in-out hover:border-gray-400 hover:text-gray-400"
+            className="flex min-w-[175px] items-center justify-center rounded-md border-2 border-dashed border-gray-300 p-2 text-gray-300 transition duration-300 ease-in-out hover:border-gray-400 hover:text-gray-400"
           >
             {emailDisplay}
             <FontAwesomeIcon icon={faCopy} className="ml-2" />
