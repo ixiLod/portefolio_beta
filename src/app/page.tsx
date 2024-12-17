@@ -6,12 +6,12 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Mon Portfolio - Accueil</title>
+        <title>ixiLod - Creative Coder & Visual Artist</title>
         <meta
           name="description"
-          content="Bienvenue sur mon portfolio. Découvrez mes créations et mon parcours."
+          content="A self-taught developer passionate about visual arts and music, I aim to deliver unique experiences by combining these passions. Explore my world through this portfolio. Enjoy your visit!"
         />
-        <meta name="keywords" content="portfolio, créations, art, développeur" />
+        <meta name="keywords" content="portfolio, creations, art, developpement, music" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="ixilod" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
