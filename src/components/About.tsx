@@ -80,7 +80,7 @@ const About = ({ onClose }: ModalProps) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between">
-          <h2 id="about-title" className="my-4 px-2 font-ninna text-xl font-bold text-gray-300">
+          <h2 id="about-title" className="my-4 px-2 font-ninna text-xl font-bold text-gray-100">
             About
           </h2>
           <button
@@ -103,7 +103,7 @@ const About = ({ onClose }: ModalProps) => {
 
         {Object.entries(ICONS).map(([section, icons]) => (
           <div key={section}>
-            <h3 className="mt-8 px-3 font-ninna font-semibold text-gray-300">
+            <h3 className="mt-8 px-3 font-ninna font-semibold text-gray-200">
               {`My ${section} :`}
             </h3>
             <div className="mb-4 mt-2 flex flex-wrap gap-2 px-6">
