@@ -80,7 +80,7 @@ const About = ({ onClose }: ModalProps) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between">
-          <h2 id="about-title" className="my-4 px-2 font-ninna text-xl font-bold text-gray-100">
+          <h2 id="about-title" className="my-4 px-2 font-ninna text-xl font-bold text-gray-200">
             About
           </h2>
           <button
