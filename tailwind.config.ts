@@ -13,8 +13,6 @@ const config: Config = {
         foreground: 'var(--foreground)',
       },
       fontFamily: {
-        ogg: ['Ogg', 'sans-serif'],
-        archivo: ['Archivo', 'sans-serif'],
         ninna: ['Ninna', 'sans-serif'],
         neuemontreal: ['NeueMontreal', 'sans-serif'],
       },
