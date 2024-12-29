@@ -165,6 +165,7 @@ const Networks = () => {
           />
           {hoveredIndex === 0 && (
             <Html
+              translate="no"
               position={[positions[0].x, positions[0].y + 0.5, positions[0].z]}
               style={{ pointerEvents: 'none' }}
             >
@@ -204,6 +205,7 @@ const Networks = () => {
           />
           {hoveredIndex === 1 && (
             <Html
+              translate="no"
               position={[positions[1].x, positions[1].y + 0.5, positions[1].z]}
               style={{ pointerEvents: 'none' }}
             >
@@ -243,6 +245,7 @@ const Networks = () => {
           />
           {hoveredIndex === 2 && (
             <Html
+              translate="no"
               position={[positions[2].x, positions[2].y + 0.5, positions[2].z]}
               style={{ pointerEvents: 'none' }}
             >

@@ -44,7 +44,7 @@ const Contact = ({ onClose }: ModalProps) => {
         transition={{ type: 'spring', damping: 20, stiffness: 300, duration: 0.4 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="m-1 ml-4 flex items-start justify-between">
+        <div translate="no" className="m-1 ml-4 flex items-start justify-between">
           <button
             onClick={handleCopy}
             className="flex min-w-[175px] items-center justify-center rounded-md border-2 border-dashed border-gray-300 p-2 text-gray-300 transition duration-300 ease-in-out hover:border-gray-400 hover:text-gray-400"
