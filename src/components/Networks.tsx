@@ -165,7 +165,6 @@ const Networks = () => {
           />
           {hoveredIndex === 0 && (
             <Html
-              translate="no"
               position={[positions[0].x, positions[0].y + 0.5, positions[0].z]}
               style={{ pointerEvents: 'none' }}
             >
@@ -177,7 +176,7 @@ const Networks = () => {
                   borderRadius: '5px',
                 }}
               >
-                Instagram
+                <span translate="no">Instagram</span>
               </div>
             </Html>
           )}
@@ -217,7 +216,7 @@ const Networks = () => {
                   borderRadius: '5px',
                 }}
               >
-                Linktree
+                <span translate="no">Linktree</span>
               </div>
             </Html>
           )}
@@ -257,7 +256,7 @@ const Networks = () => {
                   borderRadius: '5px',
                 }}
               >
-                Github
+                <span translate="no">Github</span>
               </div>
             </Html>
           )}
