@@ -28,6 +28,6 @@
   width: 7.5rem;
   height: 7.5rem;
   border-radius: 50%;
-  background-color: #555;
+  background-color: white;
   animation: pulse 1.5s infinite ease-in-out;
 }
