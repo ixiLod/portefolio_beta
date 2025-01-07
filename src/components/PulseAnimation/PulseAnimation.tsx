@@ -6,8 +6,6 @@ const PulseAnimation = () => {
   return (
     <div className={styles.container}>
       <div className={styles.pulseCircle}></div>
-      <div className={styles.pulseCircle}></div>
-      <div className={styles.pulseCircle}></div>
     </div>
   );
 };
