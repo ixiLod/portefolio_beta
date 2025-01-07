@@ -10,8 +10,8 @@
   border: 6px solid #111;
   border-top: 7px solid #222;
   border-radius: 50%;
-  width: 10vw;
-  height: 10vw;
+  width: 7.5rem;
+  height: 7.5rem;
   animation: spin 2s linear infinite;
 }
 

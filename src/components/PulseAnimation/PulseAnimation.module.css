@@ -25,8 +25,8 @@
 
 .pulseCircle {
   position: absolute;
-  width: 10vw;
-  height: 10vw;
+  width: 7.5rem;
+  height: 7.5rem;
   border-radius: 50%;
   background-color: #555;
   animation: pulse 1.5s infinite ease-in-out;
