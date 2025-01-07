@@ -28,6 +28,6 @@
   width: 10vw;
   height: 10vw;
   border-radius: 50%;
-  background-color: white;
+  background-color: #555;
   animation: pulse 1.5s infinite ease-in-out;
 }
