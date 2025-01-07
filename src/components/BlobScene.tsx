@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
+import Loading from './Loading/Loading';
+import PulseAnimation from './PulseAnimation/PulseAnimation';
 import Blob from './Blob';
 import Sidebar from './Sidebar';
 import ParticleSystem from './ParticleSystem';
@@ -9,10 +11,10 @@ import About from './About';
 import Creations from './Creations';
 import Networks from './Networks';
 import Contact from './Contact';
-import Loading from './Loading/Loading';
 
 const BlobScene = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [showPulseAnimation, setShowPulseAnimation] = useState(false);
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [isParticlesEjected, setParticlesEjected] = useState(false);
@@ -20,22 +22,16 @@ const BlobScene = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
+      setShowPulseAnimation(true);
     }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
 
   const handleBlobClick = () => {
+    setShowPulseAnimation(false);
     setSidebarVisible((prev) => !prev);
     setParticlesEjected((prev) => !prev);
-  };
-
-  const handleMenuClick = (modalName: string) => {
-    setActiveModal(modalName);
-  };
-
-  const closeModal = () => {
-    setActiveModal(null);
   };
 
   if (isLoading) {
@@ -44,6 +40,8 @@ const BlobScene = () => {
 
   return (
     <>
+      {showPulseAnimation && <PulseAnimation />}
+
       <Canvas camera={{ position: [0, 0, 4], fov: 75 }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1.5} />
@@ -56,12 +54,12 @@ const BlobScene = () => {
 
       <Sidebar
         isVisible={isSidebarVisible}
-        onMenuClick={handleMenuClick}
+        onMenuClick={setActiveModal}
         activeModal={activeModal}
       />
-      {activeModal === 'about' && <About onClose={closeModal} />}
+      {activeModal === 'about' && <About onClose={() => setActiveModal(null)} />}
       {activeModal === 'creations' && <Creations />}
-      {activeModal === 'contact' && <Contact onClose={closeModal} />}
+      {activeModal === 'contact' && <Contact onClose={() => setActiveModal(null)} />}
     </>
   );
 };
