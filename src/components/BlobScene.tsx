@@ -9,7 +9,7 @@ import About from './About';
 import Creations from './Creations';
 import Networks from './Networks';
 import Contact from './Contact';
-import Loading from './Loading';
+import Loading from './Loading/Loading';
 
 const BlobScene = () => {
   const [isLoading, setIsLoading] = useState(true);
