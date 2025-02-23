@@ -20,7 +20,10 @@ const BlobScene = () => {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [isParticlesEjected, setParticlesEjected] = useState(false);
 
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioRef = useRef<{
+    play: () => Promise<void>;
+    getAnalyser: () => AnalyserNode | null;
+  } | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -36,9 +39,18 @@ const BlobScene = () => {
     setSidebarVisible((prev) => !prev);
     setParticlesEjected((prev) => !prev);
     if (audioRef.current) {
-      audioRef.current.play().catch((error) => {
-        console.error('Error playing audio:', error);
-      });
+      const audio = audioRef.current;
+      const analyser = audio.getAnalyser();
+      const audioContext = analyser?.context as AudioContext;
+
+      if (audioContext && audioContext.state === 'suspended') {
+        audioContext.resume().then(() => {
+          console.log('AudioContext resumed');
+          audio.play().catch((error) => console.error('Error playing audio:', error));
+        });
+      } else {
+        audio.play().catch((error) => console.error('Error playing audio:', error));
+      }
     }
   };
 
@@ -56,7 +68,7 @@ const BlobScene = () => {
         <directionalLight position={[5, 5, 5]} intensity={1.5} />
         <pointLight position={[-5, -5, -5]} intensity={1} />
         <hemisphereLight color={0xffffff} groundColor={0x444444} intensity={0.5} />
-        <Blob onClick={handleBlobClick} />
+        <Blob onClick={handleBlobClick} analyser={audioRef.current?.getAnalyser() || null} />
         <ParticleSystem isEjecting={isParticlesEjected} />
         {activeModal === 'networks' && <Networks />}
       </Canvas>

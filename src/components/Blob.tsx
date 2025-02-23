@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Sphere } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -8,16 +8,17 @@ import { vertexShader, fragmentShader } from '@/app/shaders/blobShaders';
 
 interface BlobProps {
   onClick: () => void;
+  analyser: AnalyserNode | null;
 }
 
-const Blob = ({ onClick }: BlobProps) => {
+const Blob = ({ onClick, analyser }: BlobProps) => {
   const meshRef = useRef<THREE.Mesh>(null!);
   const clock = useRef(new THREE.Clock());
   const initialPositions = useRef<Float32Array | null>(null);
-
   const [amplitude, setAmplitude] = useState(0.02);
   const [frequency, setFrequency] = useState(4);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [audioReactive, setAudioReactive] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -30,41 +31,66 @@ const Blob = ({ onClick }: BlobProps) => {
     return () => clearInterval(interval);
   }, [isAnimating]);
 
+  const prevBassStrength = useRef(0);
+  const prevMidStrength = useRef(0);
+
   useFrame(() => {
-    if (meshRef.current) {
-      const time = clock.current.getElapsedTime();
-      const material = meshRef.current.material as THREE.ShaderMaterial;
-      if (material.uniforms) {
-        material.uniforms.uTime.value = time;
-      }
+    if (!meshRef.current) return;
 
-      const geometry = meshRef.current.geometry;
-      const positionArray = geometry.attributes.position.array as Float32Array;
-
-      if (!initialPositions.current) {
-        initialPositions.current = new Float32Array(positionArray);
-      }
-
-      for (let i = 0; i < positionArray.length; i += 3) {
-        const x = initialPositions.current[i];
-        const y = initialPositions.current[i + 1];
-        const z = initialPositions.current[i + 2];
-
-        const offset =
-          Math.sin(time * frequency + x * 5) * amplitude +
-          Math.sin(time * frequency + y * 5) * amplitude +
-          Math.sin(time * frequency + z * 5) * amplitude;
-
-        positionArray[i] = x + (x / Math.sqrt(x * x + y * y + z * z)) * offset;
-        positionArray[i + 1] = y + (y / Math.sqrt(x * x + y * y + z * z)) * offset;
-        positionArray[i + 2] = z + (z / Math.sqrt(x * x + y * y + z * z)) * offset;
-      }
-      geometry.attributes.position.needsUpdate = true;
+    const time = clock.current.getElapsedTime();
+    const material = meshRef.current.material as THREE.ShaderMaterial;
+    if (material.uniforms) {
+      material.uniforms.uTime.value = time;
     }
+
+    const geometry = meshRef.current.geometry;
+    const positionArray = geometry.attributes.position.array as Float32Array;
+
+    if (!initialPositions.current) {
+      initialPositions.current = new Float32Array(positionArray);
+    }
+
+    let dynamicAmplitude = amplitude;
+    let dynamicFrequency = frequency;
+
+    if (audioReactive && analyser) {
+      const dataArray = new Uint8Array(analyser.frequencyBinCount);
+      analyser.getByteFrequencyData(dataArray);
+
+      const bass = dataArray.slice(0, 10).reduce((a, b) => a + b, 0) / 10;
+      const mids = dataArray.slice(10, 50).reduce((a, b) => a + b, 0) / 40;
+
+      const smoothedBass = prevBassStrength.current * 0.9 + bass * 0.1;
+      const smoothedMids = prevMidStrength.current * 0.9 + mids * 0.1;
+
+      prevBassStrength.current = smoothedBass;
+      prevMidStrength.current = smoothedMids;
+
+      dynamicAmplitude += smoothedBass * 0.0003;
+      dynamicFrequency += smoothedMids * 0.001;
+    }
+
+    for (let i = 0; i < positionArray.length; i += 3) {
+      const x = initialPositions.current[i];
+      const y = initialPositions.current[i + 1];
+      const z = initialPositions.current[i + 2];
+
+      const offset =
+        Math.sin(time * dynamicFrequency + x * 3) * dynamicAmplitude * 0.5 +
+        Math.sin(time * dynamicFrequency + y * 3) * dynamicAmplitude * 0.5 +
+        Math.sin(time * dynamicFrequency + z * 3) * dynamicAmplitude * 0.5;
+
+      positionArray[i] = x + (x / Math.sqrt(x * x + y * y + z * z)) * offset;
+      positionArray[i + 1] = y + (y / Math.sqrt(x * x + y * y + z * z)) * offset;
+      positionArray[i + 2] = z + (z / Math.sqrt(x * x + y * y + z * z)) * offset;
+    }
+
+    geometry.attributes.position.needsUpdate = true;
   });
 
   const handleClick = () => {
     if (isAnimating) return;
+
     setIsAnimating(true);
     setAmplitude(0.08);
     setFrequency(5);
@@ -72,7 +98,9 @@ const Blob = ({ onClick }: BlobProps) => {
       setAmplitude(0.02);
       setFrequency(4);
       setIsAnimating(false);
+      setAudioReactive(true);
     }, 350);
+
     onClick();
   };
 
