@@ -1,5 +1,6 @@
 import BlobScene from '@/components/BlobScene';
 import ParticleSystem from '@/components/ParticleSystem';
+import AudioPlayer from '@/components/AudioPlayer';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         </h1>
         <BlobScene />
         <ParticleSystem isEjecting={false} />
+        <AudioPlayer />
       </div>
     </>
   );

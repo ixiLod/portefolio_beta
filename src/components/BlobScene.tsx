@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Loading from './Loading/Loading';
 import PulseAnimation from './PulseAnimation/PulseAnimation';
@@ -11,6 +11,7 @@ import About from './About';
 import Creations from './Creations';
 import Networks from './Networks';
 import Contact from './Contact';
+import AudioPlayer from './AudioPlayer';
 
 const BlobScene = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,6 +19,8 @@ const BlobScene = () => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [isParticlesEjected, setParticlesEjected] = useState(false);
+
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,6 +35,11 @@ const BlobScene = () => {
     setShowPulseAnimation(false);
     setSidebarVisible((prev) => !prev);
     setParticlesEjected((prev) => !prev);
+    if (audioRef.current) {
+      audioRef.current.play().catch((error) => {
+        console.error('Error playing audio:', error);
+      });
+    }
   };
 
   if (isLoading) {
@@ -40,6 +48,7 @@ const BlobScene = () => {
 
   return (
     <>
+      <AudioPlayer ref={audioRef} />
       {showPulseAnimation && <PulseAnimation />}
 
       <Canvas camera={{ position: [0, 0, 4], fov: 75 }}>
