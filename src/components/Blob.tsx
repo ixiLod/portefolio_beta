@@ -37,10 +37,10 @@ const Blob = ({ onClick, analyser }: BlobProps) => {
   useFrame(() => {
     if (!meshRef.current) return;
 
-    const delta = clock.current.getDelta(); // Assure une vitesse stable
+    const delta = clock.current.getDelta();
     const material = meshRef.current.material as THREE.ShaderMaterial;
     if (material.uniforms) {
-      material.uniforms.uTime.value += delta; // Incrémentation contrôlée
+      material.uniforms.uTime.value += delta * 1.02;
     }
 
     const geometry = meshRef.current.geometry;
