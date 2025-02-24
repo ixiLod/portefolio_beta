@@ -40,7 +40,7 @@ const Blob = ({ onClick, analyser }: BlobProps) => {
     if (material.uniforms) {
       material.uniforms.uTime.value += delta;
 
-      if (material.uniforms.uTime.value >= 120) {
+      if (material.uniforms.uTime.value >= 60) {
         material.uniforms.uTime.value = 0;
       }
     }
