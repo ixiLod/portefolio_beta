@@ -13,7 +13,6 @@ interface BlobProps {
 
 const Blob = ({ onClick, analyser }: BlobProps) => {
   const meshRef = useRef<THREE.Mesh>(null!);
-  const clock = useRef(new THREE.Clock());
   const initialPositions = useRef<Float32Array | null>(null);
   const [amplitude, setAmplitude] = useState(0.02);
   const [frequency, setFrequency] = useState(4);
@@ -34,12 +33,12 @@ const Blob = ({ onClick, analyser }: BlobProps) => {
   const prevBassStrength = useRef(0);
   const prevMidStrength = useRef(0);
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (!meshRef.current) return;
 
     const material = meshRef.current.material as THREE.ShaderMaterial;
     if (material.uniforms) {
-      material.uniforms.uTime.value = clock.current.getElapsedTime() * 0.8;
+      material.uniforms.uTime.value += delta;
     }
 
     const geometry = meshRef.current.geometry;
