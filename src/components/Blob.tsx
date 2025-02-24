@@ -37,10 +37,9 @@ const Blob = ({ onClick, analyser }: BlobProps) => {
   useFrame(() => {
     if (!meshRef.current) return;
 
-    const delta = clock.current.getDelta();
     const material = meshRef.current.material as THREE.ShaderMaterial;
     if (material.uniforms) {
-      material.uniforms.uTime.value += delta * 1.02;
+      material.uniforms.uTime.value = clock.current.getElapsedTime() * 0.8;
     }
 
     const geometry = meshRef.current.geometry;
