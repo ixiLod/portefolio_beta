@@ -37,10 +37,10 @@ const Blob = ({ onClick, analyser }: BlobProps) => {
   useFrame(() => {
     if (!meshRef.current) return;
 
-    const time = clock.current.getElapsedTime();
+    const delta = clock.current.getDelta(); // Assure une vitesse stable
     const material = meshRef.current.material as THREE.ShaderMaterial;
     if (material.uniforms) {
-      material.uniforms.uTime.value = time;
+      material.uniforms.uTime.value += delta; // Incrémentation contrôlée
     }
 
     const geometry = meshRef.current.geometry;
@@ -76,9 +76,13 @@ const Blob = ({ onClick, analyser }: BlobProps) => {
       const z = initialPositions.current[i + 2];
 
       const offset =
-        Math.sin(time * dynamicFrequency + x * 3) * dynamicAmplitude * 0.5 +
-        Math.sin(time * dynamicFrequency + y * 3) * dynamicAmplitude * 0.5 +
-        Math.sin(time * dynamicFrequency + z * 3) * dynamicAmplitude * 0.5;
+        Math.sin(material.uniforms.uTime.value * dynamicFrequency + x * 3) *
+          dynamicAmplitude *
+          0.5 +
+        Math.sin(material.uniforms.uTime.value * dynamicFrequency + y * 3) *
+          dynamicAmplitude *
+          0.5 +
+        Math.sin(material.uniforms.uTime.value * dynamicFrequency + z * 3) * dynamicAmplitude * 0.5;
 
       positionArray[i] = x + (x / Math.sqrt(x * x + y * y + z * z)) * offset;
       positionArray[i + 1] = y + (y / Math.sqrt(x * x + y * y + z * z)) * offset;
