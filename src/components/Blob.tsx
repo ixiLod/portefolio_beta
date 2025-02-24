@@ -38,10 +38,15 @@ const Blob = ({ onClick, analyser }: BlobProps) => {
 
     const material = meshRef.current.material as THREE.ShaderMaterial;
     if (material.uniforms) {
-      material.uniforms.uTime.value += delta;
+      if (material.uniforms.uTime.value === 0) {
+        material.uniforms.uTime.value = 10;
+      }
+
+      const speed = 0.9;
+      material.uniforms.uTime.value += delta * speed;
 
       if (material.uniforms.uTime.value >= 60) {
-        material.uniforms.uTime.value = 0;
+        material.uniforms.uTime.value = 10;
       }
     }
 
