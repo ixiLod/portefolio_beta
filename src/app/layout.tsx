@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import localFont from 'next/font/local';
 import './globals.css';
 
@@ -34,7 +35,10 @@ export default function RootLayout({
         <meta name="author" content="ixilod" />
         <link rel="canonical" href="https://ixilod.com/" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
