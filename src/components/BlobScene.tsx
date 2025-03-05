@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
+import { motion } from 'framer-motion';
 
 import Loading from './Loading/Loading';
 import PulseAnimation from './PulseAnimation/PulseAnimation';
@@ -133,13 +134,21 @@ const BlobScene = () => {
       {showPulseAnimation && <PulseAnimation />}
 
       {isClicked && (
-        <button
+        <motion.button
           onClick={handleMuteClick}
           className="fixed right-4 top-4 z-50 flex size-12 items-center justify-center rounded-full bg-slate-300 bg-opacity-10 p-2 text-white backdrop-blur-sm transition-all hover:bg-opacity-20"
           aria-label={isMuted ? 'Activer le son' : 'Couper le son'}
+          initial={{ x: '150%' }}
+          animate={{ x: 0 }}
+          transition={{
+            type: 'spring',
+            stiffness: 300,
+            damping: 30,
+            duration: 0.5,
+          }}
         >
           <FontAwesomeIcon icon={isMuted ? faVolumeMute : faVolumeUp} className="size-5" />
-        </button>
+        </motion.button>
       )}
 
       <Canvas camera={{ position: [0, 0, 4], fov: 75 }}>
