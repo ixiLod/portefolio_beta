@@ -62,7 +62,7 @@ const AudioPlayer = forwardRef<
   }));
 
   return (
-    <audio ref={audioRef} src="/assets/sounds/scizzie - aquatic ambience.mp3" preload="auto" loop />
+    <audio ref={audioRef} src="/assets/sounds/scizzie - aquatic ambience.mp3" preload="none" loop />
   );
 });
 
