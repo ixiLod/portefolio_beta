@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
+
 import Loading from './Loading/Loading';
 import PulseAnimation from './PulseAnimation/PulseAnimation';
 import Blob from './Blob';
@@ -12,6 +13,7 @@ import Creations from './Creations';
 import Networks from './Networks';
 import Contact from './Contact';
 import AudioPlayer from './AudioPlayer';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 
@@ -133,10 +135,10 @@ const BlobScene = () => {
       {isClicked && (
         <button
           onClick={handleMuteClick}
-          className="fixed right-4 top-4 z-50 rounded-full bg-slate-300 bg-opacity-10 p-3 text-white backdrop-blur-sm transition-all hover:bg-opacity-20"
+          className="fixed right-4 top-4 z-50 flex size-12 items-center justify-center rounded-full bg-slate-300 bg-opacity-10 p-2 text-white backdrop-blur-sm transition-all hover:bg-opacity-20"
           aria-label={isMuted ? 'Activer le son' : 'Couper le son'}
         >
-          <FontAwesomeIcon icon={isMuted ? faVolumeMute : faVolumeUp} className="size-6" />
+          <FontAwesomeIcon icon={isMuted ? faVolumeMute : faVolumeUp} className="size-5" />
         </button>
       )}
 

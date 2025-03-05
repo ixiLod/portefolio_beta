@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { Sphere } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
+import { Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 import { vertexShader, fragmentShader } from '@/app/shaders/blobShaders';
 

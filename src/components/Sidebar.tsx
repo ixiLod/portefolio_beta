@@ -44,7 +44,7 @@ const Sidebar = ({ isVisible, onMenuClick, activeModal }: SidebarProps) => {
         transition={{ duration: 0.3 }}
         className="flex h-full items-center justify-center"
       >
-        <nav aria-label="Menu de navigation principale">
+        <nav aria-label="Main navigation menu">
           <ul className="flex items-center">
             {MENU_ITEMS.map(({ title, trigger }) => (
               <li className="mx-2 flex items-center" key={trigger}>
