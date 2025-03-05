@@ -21,8 +21,9 @@ const Creations = () => {
     <ScrollControls
       pages={CREATIONS.length}
       damping={0.1}
+      eps={0.00001}
+      infinite
       style={{ scrollbarWidth: 'none' }}
-      scrollControls={{ eps: 0.00001, infinite: true }}
     >
       <Scroll>
         {CREATIONS.map((creation, index) => (
