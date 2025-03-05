@@ -138,14 +138,15 @@ const BlobScene = () => {
           onClick={handleMuteClick}
           className="fixed right-4 top-4 z-50 flex size-12 items-center justify-center rounded-full bg-slate-300 bg-opacity-10 p-2 text-white backdrop-blur-sm transition-all hover:bg-opacity-20"
           aria-label={isMuted ? 'Activer le son' : 'Couper le son'}
-          initial={{ x: '150%' }}
-          animate={{ x: 0 }}
+          initial={{ transform: 'translateX(200%)' }}
+          animate={{ transform: 'translateX(0%)' }}
           transition={{
-            type: 'spring',
-            stiffness: 300,
-            damping: 30,
-            duration: 0.5,
+            type: 'tween',
+            ease: [0.25, 0.1, 0.25, 1],
+            duration: 0.6,
+            delay: 0.1,
           }}
+          style={{ willChange: 'transform' }}
         >
           <FontAwesomeIcon icon={isMuted ? faVolumeMute : faVolumeUp} className="size-5" />
         </motion.button>
