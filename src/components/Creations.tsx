@@ -1,11 +1,45 @@
+'use client';
+
+import { ScrollControls, Scroll } from '@react-three/drei';
+import CreationItem from './CreationItem';
+
+const CREATIONS = [
+  {
+    slug: 'disney',
+    mediaUrl: '/creations/Disney.webm',
+    mediaType: 'video' as const,
+  },
+  {
+    slug: 'test',
+    mediaUrl: '/creations/test.jpg',
+    mediaType: 'image' as const,
+  },
+];
+
 const Creations = () => {
   return (
-    <div className="absolute  bottom-32 left-1/2 w-86 -translate-x-1/2 rounded-xl border border-white bg-black p-4 opacity-70">
-      <p className="text-xl text-white">
-        This site is under construction, and the &quot;My Creations&quot; section is not yet
-        available.
-      </p>
-    </div>
+    <ScrollControls
+      pages={CREATIONS.length}
+      damping={0.1}
+      style={{ scrollbarWidth: 'none' }}
+      scrollControls={{ eps: 0.00001, infinite: true }}
+    >
+      <Scroll>
+        {CREATIONS.map((creation, index) => (
+          <CreationItem
+            key={creation.slug}
+            position={[
+              Math.sin((index / CREATIONS.length) * Math.PI * 2),
+              0,
+              Math.cos((index / CREATIONS.length) * Math.PI * 2),
+            ]}
+            mediaUrl={creation.mediaUrl}
+            mediaType={creation.mediaType}
+            projectSlug={creation.slug}
+          />
+        ))}
+      </Scroll>
+    </ScrollControls>
   );
 };
 

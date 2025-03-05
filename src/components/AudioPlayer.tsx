@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
+import { forwardRef, useImperativeHandle, useRef, useEffect, useState } from 'react';
 
 declare global {
   interface Window {
@@ -9,13 +9,19 @@ declare global {
 }
 
 const AudioPlayer = forwardRef<
-  { play: () => Promise<void>; getAnalyser: () => AnalyserNode | null },
+  {
+    play: () => Promise<void>;
+    getAnalyser: () => AnalyserNode | null;
+    mute: () => void;
+    isMuted: boolean;
+  },
   unknown
 >((_, ref) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     if (audioRef.current && !audioContextRef.current) {
@@ -46,6 +52,13 @@ const AudioPlayer = forwardRef<
       return Promise.resolve();
     },
     getAnalyser: () => analyserRef.current,
+    mute: () => {
+      if (audioRef.current) {
+        audioRef.current.muted = !audioRef.current.muted;
+        setIsMuted(!isMuted);
+      }
+    },
+    isMuted: isMuted,
   }));
 
   return (

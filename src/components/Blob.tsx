@@ -9,15 +9,15 @@ import { vertexShader, fragmentShader } from '@/app/shaders/blobShaders';
 interface BlobProps {
   onClick: () => void;
   analyser: AnalyserNode | null;
+  isAudioReactive: boolean;
 }
 
-const Blob = ({ onClick, analyser }: BlobProps) => {
+const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
   const meshRef = useRef<THREE.Mesh>(null!);
   const initialPositions = useRef<Float32Array | null>(null);
   const [amplitude, setAmplitude] = useState(0.02);
   const [frequency, setFrequency] = useState(4);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [audioReactive, setAudioReactive] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -60,7 +60,7 @@ const Blob = ({ onClick, analyser }: BlobProps) => {
     let dynamicAmplitude = amplitude;
     let dynamicFrequency = frequency;
 
-    if (audioReactive && analyser) {
+    if (isAudioReactive && analyser) {
       const dataArray = new Uint8Array(analyser.frequencyBinCount);
       analyser.getByteFrequencyData(dataArray);
 
@@ -109,7 +109,6 @@ const Blob = ({ onClick, analyser }: BlobProps) => {
       setAmplitude(0.02);
       setFrequency(4);
       setIsAnimating(false);
-      setAudioReactive(true);
     }, 350);
 
     onClick();

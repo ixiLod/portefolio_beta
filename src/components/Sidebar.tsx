@@ -16,6 +16,13 @@ const MENU_ITEMS = [
 ];
 
 const Sidebar = ({ isVisible, onMenuClick, activeModal }: SidebarProps) => {
+  const handleMenuClick = (trigger: string) => {
+    if (trigger !== 'creations') {
+      window.history.pushState({}, '', '/');
+    }
+    onMenuClick(trigger);
+  };
+
   return (
     <div
       className={`fixed inset-x-0 bottom-3 z-50 h-16 w-80 transform rounded-full border-neutral-400 bg-slate-300 bg-opacity-10 text-sm text-white backdrop-blur-sm transition-transform duration-300 xs:w-86 ${
@@ -42,9 +49,7 @@ const Sidebar = ({ isVisible, onMenuClick, activeModal }: SidebarProps) => {
             {MENU_ITEMS.map(({ title, trigger }) => (
               <li className="mx-2 flex items-center" key={trigger}>
                 <motion.button
-                  onClick={() => {
-                    onMenuClick(trigger);
-                  }}
+                  onClick={() => handleMenuClick(trigger)}
                   className={`flex items-center transition-colors hover:text-gray-300 ${
                     activeModal === trigger ? 'text-white' : 'text-gray-400'
                   } ${trigger === 'creations' ? 'line-through' : ''} text-xs xs:text-sm`}

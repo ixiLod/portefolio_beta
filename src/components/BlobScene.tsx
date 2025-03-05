@@ -12,6 +12,8 @@ import Creations from './Creations';
 import Networks from './Networks';
 import Contact from './Contact';
 import AudioPlayer from './AudioPlayer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faVolumeUp, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
 
 const BlobScene = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,25 +21,81 @@ const BlobScene = () => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const [isParticlesEjected, setParticlesEjected] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isAudioReactive, setIsAudioReactive] = useState(false);
 
   const audioRef = useRef<{
     play: () => Promise<void>;
     getAnalyser: () => AnalyserNode | null;
+    mute: () => void;
+    isMuted: boolean;
   } | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get('section') === 'creations') {
       setIsLoading(false);
-      setShowPulseAnimation(true);
-    }, 2000);
+      setShowPulseAnimation(false);
+      setSidebarVisible(true);
+      setParticlesEjected(true);
+      setIsClicked(true);
+      setIsAudioReactive(true);
+      if (audioRef.current) {
+        const audio = audioRef.current;
+        const analyser = audio.getAnalyser();
+        const audioContext = analyser?.context as AudioContext;
 
-    return () => clearTimeout(timer);
+        if (audioContext && audioContext.state === 'suspended') {
+          audioContext.resume().then(() => {
+            audio.play().catch((error) => console.error('Error playing audio:', error));
+          });
+        } else {
+          audio.play().catch((error) => console.error('Error playing audio:', error));
+        }
+      }
+    } else {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        setShowPulseAnimation(true);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+
+    const handleOpenMenu = () => {
+      setShowPulseAnimation(false);
+      setSidebarVisible(true);
+      setParticlesEjected(true);
+      setIsClicked(true);
+      if (audioRef.current) {
+        const audio = audioRef.current;
+        audio.play().catch((error) => console.error('Error playing audio:', error));
+      }
+    };
+
+    const handleActivateCreations = () => {
+      setActiveModal('creations');
+    };
+
+    window.addEventListener('openMenu', handleOpenMenu);
+    window.addEventListener('activateCreations', handleActivateCreations);
+    window.addEventListener('skipIntro', handleOpenMenu);
+    window.addEventListener('showCreations', handleActivateCreations);
+
+    return () => {
+      window.removeEventListener('openMenu', handleOpenMenu);
+      window.removeEventListener('activateCreations', handleActivateCreations);
+      window.removeEventListener('skipIntro', handleOpenMenu);
+      window.removeEventListener('showCreations', handleActivateCreations);
+    };
   }, []);
 
   const handleBlobClick = () => {
     setShowPulseAnimation(false);
     setSidebarVisible((prev) => !prev);
     setParticlesEjected((prev) => !prev);
+    setIsAudioReactive(true);
+    setIsClicked(true);
     if (audioRef.current) {
       const audio = audioRef.current;
       const analyser = audio.getAnalyser();
@@ -54,6 +112,15 @@ const BlobScene = () => {
     }
   };
 
+  const handleMuteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (audioRef.current) {
+      audioRef.current.mute();
+      setIsMuted(!isMuted);
+    }
+  };
+
   if (isLoading) {
     return <Loading />;
   }
@@ -63,14 +130,29 @@ const BlobScene = () => {
       <AudioPlayer ref={audioRef} />
       {showPulseAnimation && <PulseAnimation />}
 
+      {isClicked && (
+        <button
+          onClick={handleMuteClick}
+          className="fixed right-4 top-4 z-50 rounded-full bg-slate-300 bg-opacity-10 p-3 text-white backdrop-blur-sm transition-all hover:bg-opacity-20"
+          aria-label={isMuted ? 'Activer le son' : 'Couper le son'}
+        >
+          <FontAwesomeIcon icon={isMuted ? faVolumeMute : faVolumeUp} className="size-6" />
+        </button>
+      )}
+
       <Canvas camera={{ position: [0, 0, 4], fov: 75 }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1.5} />
         <pointLight position={[-5, -5, -5]} intensity={1} />
         <hemisphereLight color={0xffffff} groundColor={0x444444} intensity={0.5} />
-        <Blob onClick={handleBlobClick} analyser={audioRef.current?.getAnalyser() || null} />
+        <Blob
+          onClick={handleBlobClick}
+          analyser={audioRef.current?.getAnalyser() || null}
+          isAudioReactive={isAudioReactive}
+        />
         <ParticleSystem isEjecting={isParticlesEjected} />
         {activeModal === 'networks' && <Networks />}
+        {activeModal === 'creations' && <Creations />} {/* Intégration du composant Creations */}
       </Canvas>
 
       <Sidebar
@@ -79,7 +161,6 @@ const BlobScene = () => {
         activeModal={activeModal}
       />
       {activeModal === 'about' && <About onClose={() => setActiveModal(null)} />}
-      {activeModal === 'creations' && <Creations />}
       {activeModal === 'contact' && <Contact onClose={() => setActiveModal(null)} />}
     </>
   );

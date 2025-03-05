@@ -1,10 +1,12 @@
 import BlobScene from '@/components/BlobScene';
 import ParticleSystem from '@/components/ParticleSystem';
 import AudioPlayer from '@/components/AudioPlayer';
+import NavigationHandler from '@/components/NavigationHandler';
 
 export default function Home() {
   return (
     <>
+      <NavigationHandler />
       <div className="relative h-screen">
         <h1
           translate="no"
