@@ -152,7 +152,7 @@ const BlobScene = () => {
         </motion.button>
       )}
 
-      <Canvas camera={{ position: [0, 0, 4], fov: 75 }}>
+      <Canvas camera={{ position: [0, 0, 4], fov: 75 }} style={{ position: 'fixed' }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1.5} />
         <pointLight position={[-5, -5, -5]} intensity={1} />

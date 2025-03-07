@@ -15,6 +15,7 @@ interface CreationItemProps {
   projectSlug: string;
   amplitude?: number;
   frequency?: number;
+  scale?: [number, number, number];
 }
 
 const CreationItem = ({
@@ -24,13 +25,13 @@ const CreationItem = ({
   projectSlug,
   amplitude = 0.3,
   frequency = 2.5,
+  scale = [1, 1, 1],
 }: CreationItemProps) => {
   const meshRef = useRef<THREE.Mesh>(null!);
   const materialRef = useRef<THREE.ShaderMaterial>(null!);
   const [error, setError] = useState(false);
   const router = useRouter();
 
-  // Initialisation des uniforms
   const uniforms = useRef({
     uTime: { value: 0 },
     uAmplitude: { value: amplitude },
@@ -79,8 +80,21 @@ const CreationItem = ({
   if (error) return null;
 
   return (
-    <mesh ref={meshRef} position={position} onClick={() => router.push(`/projects/${projectSlug}`)}>
-      <planeGeometry args={[1.77, 1, 32, 32]} />
+    <mesh
+      ref={meshRef}
+      position={position}
+      scale={scale}
+      onClick={() => router.push(`/projects/${projectSlug}`)}
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        document.body.style.cursor = 'pointer';
+      }}
+      onPointerOut={(e) => {
+        e.stopPropagation();
+        document.body.style.cursor = 'default';
+      }}
+    >
+      <planeGeometry args={[1, 1, 32, 32]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
