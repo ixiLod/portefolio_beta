@@ -37,6 +37,10 @@ const Creations = () => {
         overflowX: 'hidden',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
+        touchAction: 'none',
+        WebkitOverflowScrolling: 'touch',
+        userSelect: 'none',
+        WebkitTapHighlightColor: 'transparent',
       }}
       eps={0.00001}
     >
