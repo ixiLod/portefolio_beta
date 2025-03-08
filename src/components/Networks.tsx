@@ -2,9 +2,9 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
-import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Html } from '@react-three/drei';
+import { Group } from 'three';
+import { GLTFLoader, GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 
 interface Position {
   x: number;
@@ -20,14 +20,14 @@ const quadraticBezier = (t: number, p0: Position, p1: Position, p2: Position): P
 };
 
 const Networks = () => {
-  const gltfRef1 = useRef<THREE.Group | null>(null);
-  const gltfRef2 = useRef<THREE.Group | null>(null);
-  const gltfRef3 = useRef<THREE.Group | null>(null);
+  const gltfRef1 = useRef<Group | null>(null);
+  const gltfRef2 = useRef<Group | null>(null);
+  const gltfRef3 = useRef<Group | null>(null);
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [gltfModel1, setGltfModel1] = useState<THREE.Group | null>(null);
-  const [gltfModel2, setGltfModel2] = useState<THREE.Group | null>(null);
-  const [gltfModel3, setGltfModel3] = useState<THREE.Group | null>(null);
+  const [gltfModel1, setGltfModel1] = useState<Group | null>(null);
+  const [gltfModel2, setGltfModel2] = useState<Group | null>(null);
+  const [gltfModel3, setGltfModel3] = useState<Group | null>(null);
 
   const positions: Position[] = [
     { x: -0.9, y: 1.1, z: 1 },
@@ -59,8 +59,8 @@ const Networks = () => {
 
     const loadModel = (
       url: string,
-      setModel: React.Dispatch<React.SetStateAction<THREE.Group | null>>,
-      ref: React.MutableRefObject<THREE.Group | null>,
+      setModel: React.Dispatch<React.SetStateAction<Group | null>>,
+      ref: React.MutableRefObject<Group | null>,
       modelName: string
     ) => {
       loader.load(

@@ -1,12 +1,20 @@
 'use client';
 
-import { useFrame, extend } from '@react-three/fiber';
 import { useRef, useEffect, useState } from 'react';
-import * as THREE from 'three';
 import { useRouter } from 'next/navigation';
+import { useFrame, extend } from '@react-three/fiber';
+import {
+  ShaderMaterial,
+  Mesh,
+  Texture,
+  VideoTexture,
+  LinearFilter,
+  TextureLoader,
+  DoubleSide,
+} from 'three';
 import { vertexShader, fragmentShader } from '@/app/shaders/creationTileShaders';
 
-extend({ ShaderMaterial: THREE.ShaderMaterial });
+extend({ ShaderMaterial: ShaderMaterial });
 
 interface CreationItemProps {
   position: [number, number, number];
@@ -27,8 +35,8 @@ const CreationItem = ({
   frequency = 2.5,
   scale = [1, 1, 1],
 }: CreationItemProps) => {
-  const meshRef = useRef<THREE.Mesh>(null!);
-  const materialRef = useRef<THREE.ShaderMaterial>(null!);
+  const meshRef = useRef<Mesh>(null!);
+  const materialRef = useRef<ShaderMaterial>(null!);
   const [error, setError] = useState(false);
   const router = useRouter();
 
@@ -36,7 +44,7 @@ const CreationItem = ({
     uTime: { value: 0 },
     uAmplitude: { value: amplitude },
     uFrequency: { value: frequency },
-    uTexture: { value: null as THREE.Texture | null },
+    uTexture: { value: null as Texture | null },
   });
 
   useEffect(() => {
@@ -51,12 +59,12 @@ const CreationItem = ({
           video.crossOrigin = 'anonymous';
           await video.play();
 
-          const videoTexture = new THREE.VideoTexture(video);
-          videoTexture.minFilter = THREE.LinearFilter;
-          videoTexture.magFilter = THREE.LinearFilter;
+          const videoTexture = new VideoTexture(video);
+          videoTexture.minFilter = LinearFilter;
+          videoTexture.magFilter = LinearFilter;
           uniforms.current.uTexture.value = videoTexture;
         } else {
-          const loader = new THREE.TextureLoader();
+          const loader = new TextureLoader();
           loader.load(mediaUrl, (loadedTexture) => {
             uniforms.current.uTexture.value = loadedTexture;
           });
@@ -101,7 +109,7 @@ const CreationItem = ({
         fragmentShader={fragmentShader}
         uniforms={uniforms.current}
         transparent
-        side={THREE.DoubleSide}
+        side={DoubleSide}
       />
     </mesh>
   );

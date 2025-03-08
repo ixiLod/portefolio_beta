@@ -1,20 +1,19 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import { Points, BufferGeometry, BufferAttribute, ShaderMaterial } from 'three';
 import { vertexShader, fragmentShader } from '@/app/shaders/particleSystemShaders';
 interface ParticleSystemProps {
   isEjecting: boolean;
 }
 
 const ParticleSystem = ({ isEjecting }: ParticleSystemProps) => {
-  const particlesRef = useRef<THREE.Points>(null);
+  const particlesRef = useRef<Points>(null);
   const particleCount = 1000;
   const positions = useRef(new Float32Array(particleCount * 3));
   const velocities = useRef(new Float32Array(particleCount * 3));
 
   useEffect(() => {
-    // Initialiser les positions des particules
     for (let i = 0; i < particleCount; i++) {
       positions.current[i * 3] = 0;
       positions.current[i * 3 + 1] = 0;
@@ -25,22 +24,21 @@ const ParticleSystem = ({ isEjecting }: ParticleSystemProps) => {
       velocities.current[i * 3 + 2] = 0;
     }
 
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions.current, 3));
+    const geometry = new BufferGeometry();
+    geometry.setAttribute('position', new BufferAttribute(positions.current, 3));
 
-    const material = new THREE.ShaderMaterial({
+    const material = new ShaderMaterial({
       vertexShader,
       fragmentShader,
       transparent: true,
       depthWrite: false,
     });
 
-    (particlesRef.current as THREE.Points | null) = new THREE.Points(geometry, material);
+    (particlesRef.current as Points | null) = new Points(geometry, material);
 
     const animate = () => {
       requestAnimationFrame(animate);
 
-      // Mettre à jour les positions des particules
       for (let i = 0; i < particleCount; i++) {
         positions.current[i * 3] += velocities.current[i * 3];
         positions.current[i * 3 + 1] += velocities.current[i * 3 + 1];

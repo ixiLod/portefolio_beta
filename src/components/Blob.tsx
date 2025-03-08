@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Sphere } from '@react-three/drei';
-import * as THREE from 'three';
+import { Mesh, ShaderMaterial } from 'three';
 import { vertexShader, fragmentShader } from '@/app/shaders/blobShaders';
 
 interface BlobProps {
@@ -13,7 +13,7 @@ interface BlobProps {
 }
 
 const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
-  const meshRef = useRef<THREE.Mesh>(null!);
+  const meshRef = useRef<Mesh>(null!);
   const initialPositions = useRef<Float32Array | null>(null);
   const [amplitude, setAmplitude] = useState(0.02);
   const [frequency, setFrequency] = useState(4);
@@ -36,7 +36,7 @@ const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
   useFrame((state, delta) => {
     if (!meshRef.current) return;
 
-    const material = meshRef.current.material as THREE.ShaderMaterial;
+    const material = meshRef.current.material as ShaderMaterial;
     if (material.uniforms) {
       if (material.uniforms.uTime.value === 0) {
         material.uniforms.uTime.value = 10;
