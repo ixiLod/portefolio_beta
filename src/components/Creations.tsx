@@ -1,7 +1,9 @@
 'use client';
 
-import { ScrollControls, Scroll } from '@react-three/drei';
+import { ScrollControls, Scroll, Html } from '@react-three/drei';
 import CreationItem from './CreationItem';
+import { useThree } from '@react-three/fiber';
+import { useRef } from 'react';
 
 const CREATIONS = [
   {
@@ -26,10 +28,15 @@ const CREATIONS = [
 
 const Creations = () => {
   const BASE_WIDTH = 3;
+  const SPACING = 1;
+  const viewport = useThree((state) => state.viewport);
+  const groupRef = useRef(null);
+
+  const totalWidth = CREATIONS.length * (BASE_WIDTH + SPACING);
 
   return (
     <ScrollControls
-      pages={CREATIONS.length * 0.63}
+      pages={(totalWidth + 2) / viewport.width}
       horizontal
       damping={0.1}
       distance={1}
@@ -44,7 +51,7 @@ const Creations = () => {
       eps={0.00001}
     >
       <Scroll>
-        <group position={[0, 0, 1.5]}>
+        <group ref={groupRef} position={[0, 0, 1.5]}>
           {CREATIONS.map((creation, index) => {
             const isVertical = creation.mediaRatio < 1;
             const isSquare = creation.mediaRatio === 1;
@@ -64,7 +71,7 @@ const Creations = () => {
             return (
               <CreationItem
                 key={creation.slug}
-                position={[index * (BASE_WIDTH + 1), 0, 0]}
+                position={[index * (BASE_WIDTH + SPACING), 0, 0]}
                 mediaUrl={creation.mediaUrl}
                 mediaType={creation.mediaType}
                 projectSlug={creation.slug}
@@ -72,6 +79,14 @@ const Creations = () => {
               />
             );
           })}
+          <Html
+            as="div"
+            style={{
+              width: `${totalWidth}vw`,
+              height: '1px',
+              marginLeft: '2vw',
+            }}
+          />
         </group>
       </Scroll>
     </ScrollControls>
