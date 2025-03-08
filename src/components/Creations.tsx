@@ -1,9 +1,10 @@
 'use client';
 
-import { ScrollControls, Scroll, Html } from '@react-three/drei';
+import { ScrollControls, Scroll, useScroll, Html } from '@react-three/drei';
 import CreationItem from './CreationItem';
-import { useThree } from '@react-three/fiber';
+import { useThree, useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
+import { Group } from 'three';
 
 const CREATIONS = [
   {
@@ -28,15 +29,24 @@ const CREATIONS = [
 
 const Creations = () => {
   const BASE_WIDTH = 3;
-  const SPACING = 1;
-  const viewport = useThree((state) => state.viewport);
-  const groupRef = useRef(null);
+  const SPACING = 1.5;
+  const { viewport } = useThree();
+  const scroll = useScroll();
+  const groupRef = useRef<Group>(null!);
 
-  const totalWidth = CREATIONS.length * (BASE_WIDTH + SPACING);
+  const totalWidth = CREATIONS.length * (BASE_WIDTH + SPACING) - SPACING;
+  const pages = Math.max(totalWidth / viewport.width, CREATIONS.length * 0.63);
+
+  useFrame(() => {
+    if (scroll && groupRef.current) {
+      const maxScroll = totalWidth - viewport.width;
+      groupRef.current.position.x = -scroll.offset * maxScroll;
+    }
+  });
 
   return (
     <ScrollControls
-      pages={(totalWidth + 2) / viewport.width}
+      pages={pages}
       horizontal
       damping={0.1}
       distance={1}
