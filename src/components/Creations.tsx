@@ -153,7 +153,7 @@ const Creations = () => {
   useFrame(() => {
     if (scroll && groupRef.current) {
       const maxScroll = totalWidth - viewport.width;
-      groupRef.current.position.x = -scroll.offset * maxScroll;
+      groupRef.current.position.x = scroll.offset * maxScroll;
     }
   });
 
