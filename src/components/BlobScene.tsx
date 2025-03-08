@@ -164,7 +164,7 @@ const BlobScene = () => {
         />
         <ParticleSystem isEjecting={isParticlesEjected} />
         {activeModal === 'networks' && <Networks />}
-        {activeModal === 'creations' && <Creations />} {/* Intégration du composant Creations */}
+        {activeModal === 'creations' && <Creations />}
       </Canvas>
 
       <Sidebar
