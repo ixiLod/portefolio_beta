@@ -24,22 +24,3 @@ body {
 .text-shadow {
   text-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
 }
-
-@media (min-width: 768px) {
-  [data-scroll-container]::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-@media (max-width: 767px) {
-  [data-scroll-container] {
-    scrollbar-width: auto;
-    -ms-overflow-style: auto;
-  }
-
-  [data-scroll-container]::-webkit-scrollbar {
-    display: block;
-    width: 4px;
-    height: 4px;
-  }
-}
