@@ -34,10 +34,9 @@ const Creations = () => {
       damping={0.1}
       distance={1}
       style={{
-        overflowX: 'hidden',
+        overflowX: 'auto',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
-        touchAction: 'none',
         WebkitOverflowScrolling: 'touch',
         userSelect: 'none',
         WebkitTapHighlightColor: 'transparent',
