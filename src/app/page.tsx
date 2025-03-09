@@ -8,13 +8,16 @@ export default function Home() {
     <>
       <NavigationHandler />
       <div className="relative h-screen">
-        <h1
-          translate="no"
-          className="pointer-events-none fixed left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 font-ninna text-6xl text-gray-300 md:text-7xl"
-        >
+        <BlobScene />
+        <h1 translate="no" className="sr-only">
           IXILOD
         </h1>
-        <BlobScene />
+        <div
+          aria-hidden="true"
+          className="title-container pointer-events-none fixed left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 font-ninna text-6xl text-gray-300 md:text-7xl"
+        >
+          IXILOD
+        </div>
         <ParticleSystem isEjecting={false} />
         <AudioPlayer />
       </div>

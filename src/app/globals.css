@@ -24,3 +24,12 @@ body {
 .text-shadow {
   text-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
 }
+
+.title-container {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+body[data-modal='creations'] .title-container {
+  opacity: 0;
+}

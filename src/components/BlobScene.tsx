@@ -93,6 +93,14 @@ const BlobScene = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (activeModal === 'creations') {
+      document.body.setAttribute('data-modal', 'creations');
+    } else {
+      document.body.removeAttribute('data-modal');
+    }
+  }, [activeModal]);
+
   const handleBlobClick = () => {
     setShowPulseAnimation(false);
     setSidebarVisible((prev) => !prev);
