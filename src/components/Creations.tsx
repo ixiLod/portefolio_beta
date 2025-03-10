@@ -92,30 +92,50 @@ const CreationItem = ({
   if (error) return null;
 
   return (
-    <mesh
-      ref={meshRef}
-      position={position}
-      scale={scale}
-      onClick={() => router.push(`/projects/${projectSlug}`)}
-      onPointerOver={(e) => {
-        e.stopPropagation();
-        document.body.style.cursor = 'pointer';
-      }}
-      onPointerOut={(e) => {
-        e.stopPropagation();
-        document.body.style.cursor = 'default';
-      }}
-    >
-      <planeGeometry args={[1, 1, 32, 32]} />
-      <shaderMaterial
-        ref={materialRef}
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-        uniforms={uniforms.current}
-        transparent
-        side={DoubleSide}
-      />
-    </mesh>
+    <group>
+      <mesh
+        ref={meshRef}
+        position={position}
+        scale={scale}
+        onClick={() => router.push(`/projects/${projectSlug}`)}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          document.body.style.cursor = 'pointer';
+        }}
+        onPointerOut={(e) => {
+          e.stopPropagation();
+          document.body.style.cursor = 'default';
+        }}
+      >
+        <planeGeometry args={[1, 1, 32, 32]} />
+        <shaderMaterial
+          ref={materialRef}
+          vertexShader={vertexShader}
+          fragmentShader={fragmentShader}
+          uniforms={uniforms.current}
+          transparent
+          side={DoubleSide}
+        />
+      </mesh>
+
+      {/* Message "Under Construction" */}
+      <Html
+        position={[position[0], -1.5, position[2]]}
+        center
+        style={{
+          color: 'white',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          padding: '8px 12px',
+          borderRadius: '4px',
+          fontFamily: 'NeueMontreal, sans-serif',
+          fontSize: '14px',
+          whiteSpace: 'nowrap',
+          pointerEvents: 'none',
+        }}
+      >
+        <div>Site Under Construction</div>
+      </Html>
+    </group>
   );
 };
 
@@ -147,13 +167,13 @@ const Creations = () => {
   const scroll = useScroll();
   const groupRef = useRef<Group>(null!);
 
-  const totalWidth = CREATIONS.length * (BASE_WIDTH + SPACING) - SPACING;
-  const pages = Math.max(totalWidth / viewport.width, CREATIONS.length * 0.63);
+  const totalWidth = CREATIONS.length * (BASE_WIDTH + SPACING);
+  const pages = Math.max(totalWidth / viewport.width, CREATIONS.length * 0.8);
 
   useFrame(() => {
     if (scroll && groupRef.current) {
       const maxScroll = totalWidth - viewport.width;
-      groupRef.current.position.x = scroll.offset * maxScroll;
+      groupRef.current.position.x = -scroll.offset * maxScroll;
     }
   });
 
@@ -205,7 +225,7 @@ const Creations = () => {
           <Html
             as="div"
             style={{
-              width: `${totalWidth}vw`,
+              width: `${totalWidth + viewport.width}px`,
               height: '1px',
               marginLeft: '2vw',
             }}
