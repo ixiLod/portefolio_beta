@@ -13,7 +13,7 @@ import ReactIcon from '../assets/icons/React.png';
 import NextJSIcon from '../assets/icons/NextJS.png';
 import NodeJSIcon from '../assets/icons/NodeJS.png';
 import AdobeAfterEffectsIcon from '../assets/icons/Adobe After Effects.png';
-import AdobePremiereIcon from '../assets/icons/Adobe Premiere Pro.png';
+import AdobePremiereProIcon from '../assets/icons/Adobe Premiere Pro.png';
 import AdobePhotoshopIcon from '../assets/icons/Adobe Photoshop.png';
 import ComfyUIIcon from '../assets/icons/ComfyUI.png';
 import TouchDesignerIcon from '../assets/icons/Touchdesigner.png';
@@ -40,7 +40,7 @@ const ICONS = {
   ],
 
   tools: [
-    { src: AdobePremiereIcon, alt: 'Adobe Premiere' },
+    { src: AdobePremiereProIcon, alt: 'Adobe Premiere' },
     { src: AdobeAfterEffectsIcon, alt: 'Adobe After Effects' },
     { src: AdobePhotoshopIcon, alt: 'Adobe Photoshop' },
     { src: ComfyUIIcon, alt: 'ComfyUI' },

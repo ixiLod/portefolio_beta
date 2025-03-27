@@ -62,7 +62,12 @@ const AudioPlayer = forwardRef<
   }));
 
   return (
-    <audio ref={audioRef} src="/assets/sounds/scizzie - aquatic ambience.mp3" preload="none" loop />
+    <audio
+      ref={audioRef}
+      src="/assets/sounds/Donkey Kong Country - Aquatic Ambience [Restored] [2023 Mix].mp3"
+      preload="none"
+      loop
+    />
   );
 });
 
