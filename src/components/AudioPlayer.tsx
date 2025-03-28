@@ -61,14 +61,7 @@ const AudioPlayer = forwardRef<
     isMuted: isMuted,
   }));
 
-  return (
-    <audio
-      ref={audioRef}
-      src="/assets/sounds/Donkey Kong Country - Aquatic Ambience [Restored] [2023 Mix].mp3"
-      preload="none"
-      loop
-    />
-  );
+  return <audio ref={audioRef} src="/assets/sounds/aquaticAmbient.mp3" preload="none" loop />;
 });
 
 AudioPlayer.displayName = 'AudioPlayer';
