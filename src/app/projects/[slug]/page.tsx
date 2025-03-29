@@ -56,7 +56,7 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     slug: 'disney',
-    description: "AI-generated VJ loops inspired by The Lion King for Disney's stage visuals",
+    description: "AI-generated VJ loops for Disney's stage visuals",
     longDescription:
       'A creative collaboration with DisneyLand Paris to create dynamic VJ loops for their 2024 Cast Member Party. The project focused on developing vibrant visuals inspired by The Lion King, designed to enhance the DJ stage experience on large LED screens.',
     date: 'July 2024',
