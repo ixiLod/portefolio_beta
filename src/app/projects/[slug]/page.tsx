@@ -58,7 +58,8 @@ const PROJECTS: Project[] = [
     slug: 'disney',
     title: 'DisneyLand Paris Cast Member Party 2024',
     description: 'An immersive visual experience for DisneyLand Paris',
-    longDescription: 'lorem',
+    longDescription:
+      'A creative collaboration with DisneyLand Paris to create dynamic VJ loops for their 2024 Cast Member Party. The project focused on developing vibrant visuals inspired by The Lion King, designed to enhance the DJ stage experience on large LED screens.',
     date: 'July 2024',
     duration: '2 months',
     client: 'DisneyLand Paris',
@@ -72,9 +73,9 @@ const PROJECTS: Project[] = [
     seoDescription:
       'Discover the visual experience project developed for DisneyLand Paris in 2024.',
     challenge:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lobortis metus. Duis non nunc vestibulum, aliquet nisl vel, hendrerit dui. Nulla faucibus augue eget interdum eleifend. Nulla at turpis est. Vestibulum aliquam venenatis dui, eget auctor tortor. Aliquam eget dolor porttitor, fermentum nulla sed, tristique augue. Mauris malesuada tincidunt risus eu interdum. Nam tristique in sapien porta consequat. Cras dictum, leo quis dignissim condimentum, libero eros congue nisl, vitae blandit urna lacus nec massa.',
+      "The creative vision behind this project was to design VJ loops that aligned with Disney's artistic direction, with a strong emphasis on The Lion King. The loops needed to be dynamic and vibrant, enhancing the visual experience on the large LED screens of the DJ stage. To maintain the highest quality, they were upscaled to 4K, ensuring a crisp and immersive display on giant screens.",
     solution:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lobortis metus. Duis non nunc vestibulum, aliquet nisl vel, hendrerit dui. Nulla faucibus augue eget interdum eleifend. Nulla at turpis est. Vestibulum aliquam venenatis dui, eget auctor tortor. Aliquam eget dolor porttitor, fermentum nulla sed, tristique augue. Mauris malesuada tincidunt risus eu interdum. Nam tristique in sapien porta consequat. Cras dictum, leo quis dignissim condimentum, libero eros congue nisl, vitae blandit urna lacus nec massa.',
+      'To meet this requirement, I created and used masks with After Effects, which I then integrated into a custom-built ComfyUI workflow. I selected reference images based on the themes defined by the team of art directors. Once my workflow was set up and all the adjustments were fine-tuned, I generated these videos using a specific model and customized prompts. Finally, I upscaled the successful results to 4K to ensure optimal quality.',
     tools: [
       {
         name: 'ComfyUI',
@@ -86,7 +87,7 @@ const PROJECTS: Project[] = [
     team: [
       {
         name: 'CUZ.',
-        role: 'Artistic Director',
+        role: 'Creative Direction & Art Direction',
         imageUrl: Cuz,
       },
       {
@@ -161,7 +162,15 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {/* Hero Section with video */}
       <div className="relative h-[50vh] w-full md:h-[70vh]">
         <div className="absolute inset-0">
-          <video autoPlay loop muted playsInline className="size-full object-cover">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            poster="/creations/Disney-cover.jpg"
+            className="size-full object-cover"
+          >
             <source src="/creations/Disney.webm" type="video/webm" />
             Your browser does not support video playback.
           </video>
@@ -282,23 +291,52 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 <ul className="space-y-4">
                   {project.team.map((member) => (
                     <li key={member.name} className="flex items-center">
-                      {member.imageUrl && (
-                        <div className="mr-3 size-10 overflow-hidden rounded-full">
-                          <img
-                            src={
-                              typeof member.imageUrl === 'string'
-                                ? member.imageUrl
-                                : member.imageUrl.src
-                            }
-                            alt={member.name}
-                            className="size-full object-cover"
-                          />
-                        </div>
+                      {member.name === 'CUZ.' ? (
+                        <a
+                          href="https://www.cuzmade.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center transition-opacity hover:opacity-80"
+                        >
+                          {member.imageUrl && (
+                            <div className="mr-3 size-10 overflow-hidden rounded-full">
+                              <img
+                                src={
+                                  typeof member.imageUrl === 'string'
+                                    ? member.imageUrl
+                                    : member.imageUrl.src
+                                }
+                                alt={member.name}
+                                className="size-full object-cover"
+                              />
+                            </div>
+                          )}
+                          <div>
+                            <p className="font-medium text-white">{member.name}</p>
+                            <p className="text-sm text-gray-300">{member.role}</p>
+                          </div>
+                        </a>
+                      ) : (
+                        <>
+                          {member.imageUrl && (
+                            <div className="mr-3 size-10 overflow-hidden rounded-full">
+                              <img
+                                src={
+                                  typeof member.imageUrl === 'string'
+                                    ? member.imageUrl
+                                    : member.imageUrl.src
+                                }
+                                alt={member.name}
+                                className="size-full object-cover"
+                              />
+                            </div>
+                          )}
+                          <div>
+                            <p className="font-medium text-white">{member.name}</p>
+                            <p className="text-sm text-gray-300">{member.role}</p>
+                          </div>
+                        </>
                       )}
-                      <div>
-                        <p className="font-medium text-white">{member.name}</p>
-                        <p className="text-sm text-gray-300">{member.role}</p>
-                      </div>
                     </li>
                   ))}
                 </ul>
@@ -313,13 +351,12 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             Project showcase
           </h2>
 
-          {project.mediaType === 'image' && (
-            <img
-              src={project.mediaUrl}
-              alt={project.title}
-              className="mx-auto rounded-lg object-cover shadow-lg"
-            />
-          )}
+          <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
+            <video autoPlay loop muted playsInline className="size-full object-cover">
+              <source src="/creations/Disney.webm" type="video/webm" />
+              Your browser does not support video playback.
+            </video>
+          </div>
         </div>
 
         {/* Media gallery */}
@@ -371,7 +408,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             Let&apos;s discuss your next project together.
           </p>
           <a
-            href="/?section=contact"
+            href="mailto:ixilod@proton.me"
             className="inline-block rounded-full bg-white px-6 py-3 text-lg font-medium text-black transition-all hover:bg-opacity-80"
           >
             Contact me
