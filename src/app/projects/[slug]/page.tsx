@@ -25,7 +25,6 @@ interface ProjectMedia {
   type: 'image' | 'video' | 'gif';
   url: string;
   alt: string;
-  caption?: string;
 }
 
 interface Project {
@@ -58,7 +57,7 @@ const PROJECTS: Project[] = [
     slug: 'disney',
     description: "AI-generated VJ loops for Disney's stage visuals",
     longDescription:
-      'A creative collaboration with DisneyLand Paris to create dynamic VJ loops for their 2024 Cast Member Party. The project focused on developing vibrant visuals inspired by The Lion King, designed to enhance the DJ stage experience on large LED screens.',
+      'A creative collaboration with the Cuz. team and DisneyLand Paris to create about 30 dynamic VJ loops for their 2024 Cast Member Party. The project focused on developing vibrant visuals inspired by The Lion King, designed to enhance the DJ stage experience on large LED screens.',
     date: 'July 2024',
     duration: '2 months',
     client: 'DisneyLand Paris',
@@ -74,7 +73,7 @@ const PROJECTS: Project[] = [
     challenge:
       "The creative vision behind this project was to design VJ loops that aligned with Disney's artistic direction, with a strong emphasis on The Lion King. The loops needed to be dynamic and vibrant, enhancing the visual experience on the large LED screens of the DJ stage. To maintain the highest quality, they were upscaled to 4K, ensuring a crisp and immersive display on giant screens.",
     solution:
-      'To meet this requirement, I created and used masks with After Effects, which I then integrated into a custom-built ComfyUI workflow. I selected reference images based on the themes defined by the team of art directors. Once my workflow was set up and all the adjustments were fine-tuned, I generated these videos using a specific model and customized prompts. Finally, I upscaled the successful results to 4K to ensure optimal quality.',
+      'To meet the requirements, I started by creating and using masks in After Effects, which I then integrated into a custom ComfyUI workflow. I selected reference images based on the themes defined by the Cuz. Creative studio. Once the art director approved the creative direction, I fine-tuned my workflow and adjusted the details. Then, I generated the videos using a specific model and customized prompts. Finally, to ensure the highest quality, I upscaled the results to 4K.',
     tools: [
       {
         name: 'ComfyUI',
@@ -98,33 +97,43 @@ const PROJECTS: Project[] = [
     gallery: [
       {
         type: 'gif',
-        url: '/creations/disney/animation1.gif',
+        url: '/creations/disney/GIFDisney_1.gif',
         alt: 'Lorem',
-        caption: 'Lorem ipsum dolor sit amet',
       },
       {
         type: 'gif',
-        url: '/creations/disney/animation2.gif',
+        url: '/creations/disney/GIFDisney_2.gif',
         alt: 'Lorem',
-        caption: 'Lorem ipsum dolor sit amet',
-      },
-      {
-        type: 'image',
-        url: '/creations/disney/interface1.jpg',
-        alt: 'Lorem',
-        caption: 'Lorem ipsum dolor sit amet',
-      },
-      {
-        type: 'video',
-        url: '/creations/disney/demo.mp4',
-        alt: 'Lorem',
-        caption: 'Lorem ipsum dolor sit amet',
       },
       {
         type: 'gif',
-        url: '/creations/disney/animation3.gif',
+        url: '/creations/disney/GIFDisney_3.gif',
         alt: 'Lorem',
-        caption: 'Lorem ipsum dolor sit amet',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney/GIFDisney_4.gif',
+        alt: 'Lorem',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney/GIFDisney_5.gif',
+        alt: 'Lorem',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney/GIFDisney_6.gif',
+        alt: 'Lorem',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney/GIFDisney_7.gif',
+        alt: 'Lorem',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney/GIFDisney_8.gif',
+        alt: 'Lorem',
       },
     ],
     nextProject: 'test',
@@ -197,14 +206,14 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </a>
 
         <div className="flex gap-4">
-          {project.previousProject && (
+          {/* {project.previousProject && (
             <a
               href={`/projects/${project.previousProject}`}
               className="text-sm font-medium text-neutral-600 hover:text-black md:text-base"
             >
               ← Previous project
             </a>
-          )}
+          )} */}
           {project.nextProject && (
             <a
               href={`/projects/${project.nextProject}`}
@@ -354,10 +363,15 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </h2>
 
           <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
-            <video autoPlay loop muted playsInline className="size-full object-cover">
-              <source src="/creations/Disney.webm" type="video/webm" />
-              Your browser does not support video playback.
-            </video>
+            <iframe
+              title="vimeo-player"
+              src="https://player.vimeo.com/video/991471772?h=a2aa9cb1d1"
+              width="640"
+              height="360"
+              frameBorder="0"
+              allowFullScreen
+              className="size-full object-cover"
+            ></iframe>
           </div>
         </div>
 
@@ -389,12 +403,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                           className="h-64 w-full object-cover md:h-80"
                         />
                       )}
-
-                      {media.caption && (
-                        <div className="p-4">
-                          <p className="text-center text-sm text-gray-600">{media.caption}</p>
-                        </div>
-                      )}
                     </div>
                   ))}
                 </div>
@@ -419,15 +427,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
         {/* Project navigation (mobile version) */}
         <div className="mt-12 flex flex-col gap-4 md:hidden">
-          {project.previousProject && (
-            <a
-              href={`/projects/${project.previousProject}`}
-              className="flex w-full items-center justify-center rounded-lg bg-[#2A2A2A] p-4 text-center text-white"
-            >
-              ← Previous project
-            </a>
-          )}
-
           {project.nextProject && (
             <a
               href={`/projects/${project.nextProject}`}

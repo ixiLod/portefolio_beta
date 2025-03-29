@@ -120,7 +120,7 @@ const CreationItem = ({
 
       {/* Message "Under Construction" */}
       <Html
-        position={[position[0], -1.5, position[2]]}
+        position={position}
         center
         style={{
           color: 'white',
