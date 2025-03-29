@@ -71,9 +71,9 @@ const PROJECTS: Project[] = [
     seoDescription:
       'Discover the visual experience project developed for DisneyLand Paris in 2024.',
     challenge:
-      "The creative vision behind this project was to design VJ loops that aligned with Disney's artistic direction, with a strong emphasis on The Lion King. The loops needed to be dynamic and vibrant, enhancing the visual experience on the large LED screens of the DJ stage. To maintain the highest quality, they were upscaled to 4K, ensuring a crisp and immersive display on giant screens.",
+      "The creative vision behind this project was to design VJ loops that aligned with Disney's artistic direction, with a strong emphasis on The Lion King. The loops needed to be dynamic and vibrant, enhancing the visual experience on the large LED screens of the DJ stage.",
     solution:
-      'To meet the requirements, I started by creating and using masks in After Effects, which I then integrated into a custom ComfyUI workflow. I selected reference images based on the themes defined by the Cuz. Creative studio. Once the art director approved the creative direction, I fine-tuned my workflow and adjusted the details. Then, I generated the videos using a specific model and customized prompts. Finally, to ensure the highest quality, I upscaled the results to 4K.',
+      'To meet the requirements, I started by creating and using masks in After Effects, which I then integrated into a custom ComfyUI workflow. I selected reference images based on the themes defined by the Cuz. Creative studio. Once the art director approved the creative direction, I fine-tuned my workflow and adjusted the details. Then, I generated the videos using a specific model and customized prompts. Finally, to ensure the highest quality and proper adaptation to large LED screens, I upscaled the results to 4K.',
     tools: [
       {
         name: 'ComfyUI',
