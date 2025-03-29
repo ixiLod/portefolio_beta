@@ -57,7 +57,7 @@ const PROJECTS: Project[] = [
     slug: 'disney',
     description: "AI-generated VJ loops for Disney's stage visuals",
     longDescription:
-      'A creative collaboration with the Cuz. team and DisneyLand Paris to create about 30 dynamic VJ loops for their 2024 Cast Member Party. The project focused on developing vibrant visuals inspired by The Lion King, designed to enhance the DJ stage experience on large LED screens.',
+      'A creative collaboration with the Cuz. team and Disneyland Paris to produce about 30 dynamic VJ loops for the 2024 Cast Member Party. Inspired by The Lion King, these visuals were designed to elevate the DJ stage experience with bold and immersive animations.',
     date: 'July 2024',
     duration: '2 months',
     client: 'DisneyLand Paris',
@@ -71,9 +71,9 @@ const PROJECTS: Project[] = [
     seoDescription:
       'Discover the visual experience project developed for DisneyLand Paris in 2024.',
     challenge:
-      "The creative vision behind this project was to design VJ loops that aligned with Disney's artistic direction, with a strong emphasis on The Lion King. The loops needed to be dynamic and vibrant, enhancing the visual experience on the large LED screens of the DJ stage.",
+      'The goal was to craft VJ loops that aligned with Disney’s artistic direction while capturing the essence of The Lion King. They needed to be energetic, visually striking, and perfectly suited for large LED screens.',
     solution:
-      'To meet the requirements, I started by creating and using masks in After Effects, which I then integrated into a custom ComfyUI workflow. I selected reference images based on the themes defined by the Cuz. Creative studio. Once the art director approved the creative direction, I fine-tuned my workflow and adjusted the details. Then, I generated the videos using a specific model and customized prompts. Finally, to ensure the highest quality and proper adaptation to large LED screens, I upscaled the results to 4K.',
+      'I began by designing masks in After Effects, which I then integrated into a custom ComfyUI workflow. Using reference images curated by the Cuz. Creative studio, I refined the direction based on feedback from the art director. Once approved, I fine-tuned my workflow, optimized details, and generated the videos using a tailored model and prompts. To ensure top-tier quality and seamless display on large LED screens, I upscaled the final visuals to 4K.',
     tools: [
       {
         name: 'ComfyUI',
