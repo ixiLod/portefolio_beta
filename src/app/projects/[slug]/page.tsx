@@ -30,7 +30,7 @@ interface ProjectMedia {
 
 interface Project {
   slug: string;
-  title: string;
+  title?: string;
   description: string;
   longDescription?: string;
   date: string;
@@ -56,8 +56,7 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     slug: 'disney',
-    title: 'DisneyLand Paris Cast Member Party 2024',
-    description: 'An immersive visual experience for DisneyLand Paris',
+    description: "AI-generated VJ loops inspired by The Lion King for Disney's stage visuals",
     longDescription:
       'A creative collaboration with DisneyLand Paris to create dynamic VJ loops for their 2024 Cast Member Party. The project focused on developing vibrant visuals inspired by The Lion King, designed to enhance the DJ stage experience on large LED screens.',
     date: 'July 2024',
@@ -178,9 +177,12 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </div>
 
         <div className="absolute inset-0 flex flex-col items-center justify-end p-8 text-center md:p-16">
-          <h1 className="font-ninna text-4xl font-bold text-white md:text-6xl lg:text-7xl">
-            {project.title}
+          <h1 className="font-ninna text-4xl font-bold text-white md:text-7xl lg:text-8xl">
+            DisneyLand Paris
           </h1>
+          <h2 className="font-ninna text-3xl font-bold text-white md:text-5xl lg:text-6xl">
+            Cast Member Party 2024
+          </h2>
           <p className="mt-4 max-w-2xl text-lg text-white md:text-xl">{project.description}</p>
         </div>
       </div>
