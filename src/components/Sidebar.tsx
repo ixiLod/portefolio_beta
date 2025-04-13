@@ -52,7 +52,7 @@ const Sidebar = ({ isVisible, onMenuClick, activeModal }: SidebarProps) => {
                   onClick={() => handleMenuClick(trigger)}
                   className={`flex items-center transition-colors hover:text-gray-300 ${
                     activeModal === trigger ? 'text-white' : 'text-gray-400'
-                  } ${trigger === 'creations' ? 'line-through' : ''} text-xs xs:text-sm`}
+                  } text-xs xs:text-sm`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.9 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 10 }}
