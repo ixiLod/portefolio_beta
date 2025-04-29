@@ -118,22 +118,50 @@ const CreationItem = ({
         />
       </mesh>
 
-      {/* Message "Under Construction" */}
-      <Html
-        position={position}
-        center
-        style={{
-          color: 'white',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          padding: '8px 12px',
-          borderRadius: '4px',
-          fontFamily: 'NeueMontreal, sans-serif',
-          fontSize: '14px',
-          whiteSpace: 'nowrap',
-          pointerEvents: 'none',
-        }}
-      >
-        <div>Site Under Construction</div>
+      {/* Tile Title */}
+      <Html position={position} center style={{ pointerEvents: 'none' }}>
+        <div className="flex size-full flex-col items-center justify-center">
+          <span
+            className="text-center font-ninna text-4xl font-normal tracking-wide text-white md:text-6xl lg:text-7xl"
+            style={{
+              lineHeight: 1.05,
+              letterSpacing: '0.01em',
+              textShadow: '0 2px 8px rgba(0,0,0,0.18)',
+              pointerEvents: 'auto',
+            }}
+          >
+            DisneyLand
+            <br />
+            <span className="block w-full text-center">Paris</span>
+          </span>
+          <span
+            className="mt-1 text-center font-neuemontreal text-base text-white md:text-lg"
+            style={{
+              letterSpacing: '0.01em',
+              textShadow: '0 2px 8px rgba(0,0,0,0.18)',
+            }}
+          >
+            Cast Member Party 2024
+          </span>
+          <button
+            className="mt-6 flex items-center gap-3 bg-transparent px-0 py-1 text-xs font-light tracking-widest text-white md:text-sm"
+            style={{ pointerEvents: 'auto' }}
+            onClick={() => router.push(`/projects/disney`)}
+          >
+            OPEN PROJECT
+            <span className="flex size-7 items-center justify-center rounded-full bg-white">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path
+                  d="M6 9h6m0 0-2.5-2.5M12 9l-2.5 2.5"
+                  stroke="#222"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
       </Html>
     </group>
   );
