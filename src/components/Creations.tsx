@@ -25,6 +25,8 @@ interface CreationItemProps {
   mediaUrl: string;
   mediaType: 'image' | 'video';
   projectSlug: string;
+  title: string;
+  subtitle: string;
   amplitude?: number;
   frequency?: number;
   scale?: [number, number, number];
@@ -35,6 +37,8 @@ const CreationItem = ({
   mediaUrl,
   mediaType,
   projectSlug,
+  title,
+  subtitle,
   amplitude = 0.3,
   frequency = 2.5,
   scale = [1, 1, 1],
@@ -92,10 +96,9 @@ const CreationItem = ({
   if (error) return null;
 
   return (
-    <group>
+    <group position={position}>
       <mesh
         ref={meshRef}
-        position={position}
         scale={scale}
         onClick={() => router.push(`/projects/${projectSlug}`)}
         onPointerOver={(e) => {
@@ -119,7 +122,7 @@ const CreationItem = ({
       </mesh>
 
       {/* Tile Title */}
-      <Html position={position} center style={{ pointerEvents: 'none' }}>
+      <Html center style={{ pointerEvents: 'none' }}>
         <div className="flex size-full flex-col items-center justify-center">
           <span
             className="text-center font-ninna text-4xl font-normal tracking-wide text-white md:text-6xl lg:text-7xl"
@@ -129,24 +132,28 @@ const CreationItem = ({
               textShadow: '0 2px 8px rgba(0,0,0,0.18)',
               pointerEvents: 'auto',
             }}
-          >
-            DisneyLand
-            <br />
-            <span className="block w-full text-center">Paris</span>
-          </span>
-          <span
-            className="mt-1 text-center font-neuemontreal text-base text-white md:text-lg"
-            style={{
-              letterSpacing: '0.01em',
-              textShadow: '0 2px 8px rgba(0,0,0,0.18)',
+            dangerouslySetInnerHTML={{
+              __html: title
+                .split('\n')
+                .map((line) => `<span class="block w-full text-center">${line}</span>`)
+                .join(''),
             }}
-          >
-            Cast Member Party 2024
-          </span>
+          />
+          {subtitle && (
+            <span
+              className="mt-1 text-center font-neuemontreal text-base text-white md:text-lg"
+              style={{
+                letterSpacing: '0.01em',
+                textShadow: '0 2px 8px rgba(0,0,0,0.18)',
+              }}
+            >
+              {subtitle}
+            </span>
+          )}
           <button
             className="mt-6 flex items-center gap-3 bg-transparent px-0 py-1 text-xs font-light tracking-widest text-white md:text-sm"
             style={{ pointerEvents: 'auto' }}
-            onClick={() => router.push(`/projects/disney`)}
+            onClick={() => router.push(`/projects/${projectSlug}`)}
           >
             OPEN PROJECT
             <span className="flex size-7 items-center justify-center rounded-full bg-white">
@@ -173,12 +180,16 @@ const CREATIONS = [
     mediaUrl: '/creations/Disney.webm',
     mediaType: 'video' as const,
     mediaRatio: 16 / 9,
+    title: 'DisneyLand\nParis',
+    subtitle: 'Cast Member Party 2024',
   },
   {
     slug: 'cocorico2024',
     mediaUrl: '/creations/Cocorico2024.webm',
     mediaType: 'video' as const,
     mediaRatio: 16 / 9,
+    title: 'Cocorico\nElectro',
+    subtitle: '2024',
   },
   // {
   //   slug: 'test2',
@@ -201,7 +212,8 @@ const Creations = () => {
   useFrame(() => {
     if (scroll && groupRef.current) {
       const maxScroll = totalWidth - viewport.width;
-      groupRef.current.position.x = -scroll.offset * maxScroll;
+      const offset = scroll.offset;
+      groupRef.current.position.x = -offset * maxScroll;
     }
   });
 
@@ -246,6 +258,8 @@ const Creations = () => {
                 mediaUrl={creation.mediaUrl}
                 mediaType={creation.mediaType}
                 projectSlug={creation.slug}
+                title={creation.title}
+                subtitle={creation.subtitle}
                 scale={[width, height, 1]}
               />
             );
