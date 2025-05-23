@@ -58,20 +58,20 @@ const PROJECTS: Project[] = [
     description: "AI-generated VJ loops for Disney's stage visuals",
     longDescription:
       'A creative collaboration with the Cuz. team and Disneyland Paris to produce about 30 dynamic VJ loops for the 2024 Cast Member Party. Inspired by The Lion King, these visuals were designed to elevate the DJ stage experience with bold and immersive animations.',
-    date: 'July 2024',
+    date: 'June 2024',
     duration: '2 months',
     client: 'DisneyLand Paris',
     imageUrl: '/creations/Disney.jpg',
     coverImage: '/creations/Disney-cover.jpg',
     backgroundColor: '#FFFFFF',
     textColor: '#000000',
-    mediaType: 'image',
-    mediaUrl: '/creations/Disney.wbm',
+    mediaType: 'video',
+    mediaUrl: '/creations/Disney.webm',
     seoTitle: 'DisneyLand Paris Cast Member Party 2024 - IXILOD Portfolio',
     seoDescription:
       'Discover the visual experience project developed for DisneyLand Paris in 2024.',
     challenge:
-      'The goal was to craft VJ loops that aligned with Disney’s artistic direction while capturing the essence of The Lion King. They needed to be energetic, visually striking, and perfectly suited for large LED screens.',
+      "The goal was to craft VJ loops that aligned with Disney's artistic direction while capturing the essence of The Lion King. They needed to be energetic, visually striking, and perfectly suited for large LED screens.",
     solution:
       'I began by designing masks in After Effects, which I then integrated into a custom ComfyUI workflow. Using reference images curated by the Cuz. Creative studio, I refined the direction based on feedback from the art director. Once approved, I fine-tuned my workflow, optimized details, and generated the videos using a tailored model and prompts. To ensure top-tier quality and seamless display on large LED screens, I upscaled the final visuals to 4K.',
     tools: [
@@ -136,8 +136,92 @@ const PROJECTS: Project[] = [
         alt: 'Lorem',
       },
     ],
-    nextProject: 'test',
-    previousProject: 'test2',
+    nextProject: 'cocorico2024',
+    // previousProject: 'test2',
+  },
+  {
+    slug: 'cocorico2024',
+    title: 'Cocorico Electro 2024',
+    description: 'AI-generated VJ loops for Cocorico Electro Festival',
+    longDescription:
+      'Creation of generative visuals and VJ loops for the Cocorico Electro Festival 2024. A project combining artificial intelligence, motion design, and art direction to enhance the main stage of the festival.',
+    date: 'July 2024',
+    duration: '2 weeks',
+    client: 'Cocorico Electro',
+    imageUrl: '/creations/cocoricoElectro_2024/GIFCocorico2024_1.gif',
+    coverImage: '/creations/cocoricoElectro_2024/GIFCocorico2024_1.gif',
+    backgroundColor: '#FFFFFF',
+    textColor: '#000000',
+    mediaType: 'video',
+    mediaUrl: '/creations/Cocorico2024.webm',
+    seoTitle: 'Cocorico Electro 2024 - IXILOD Portfolio',
+    seoDescription:
+      'Discover the visual experience project developed for Cocorico Electro Festival in 2024',
+    tools: [
+      { name: 'ComfyUI', icon: ComfyUIIcon },
+      // { name: 'After Effects', icon: AdobeAfterEffectsIcon },
+      // { name: 'Premiere Pro', icon: AdobePremiereProIcon },
+    ],
+    team: [
+      {
+        name: 'CUZ.',
+        role: 'Creative Direction & Art Direction',
+        imageUrl: Cuz,
+      },
+      {
+        name: 'IXILOD',
+        role: 'AI Visual Artist & Motion Designer',
+        imageUrl: Ixilod,
+      },
+    ],
+    gallery: [
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2024/GIFCocorico2024_1.gif',
+        alt: 'Cocorico Electro 2024 - GIF 1',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2024/GIFCocorico2024_2.gif',
+        alt: 'Cocorico Electro 2024 - GIF 2',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2024/GIFCocorico2024_8.gif',
+        alt: 'Cocorico Electro 2024 - GIF 3',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2024/GIFCocorico2024_4.gif',
+        alt: 'Cocorico Electro 2024 - GIF 4',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2024/GIFCocorico2024_5.gif',
+        alt: 'Cocorico Electro 2024 - GIF 5',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2024/GIFCocorico2024_3.gif',
+        alt: 'Cocorico Electro 2024 - GIF 3',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2024/GIFCocorico2024_6.gif',
+        alt: 'Cocorico Electro 2024 - GIF 6',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2024/GIFCocorico2024_7.gif',
+        alt: 'Cocorico Electro 2024 - GIF 7',
+      },
+    ],
+    challenge:
+      'The challenge here was to create impactful visuals for a composition of LED panels. I had to adapt the shape of my visuals to the panel structure to achieve an immersive and precisely scaled result, while respecting the artistic direction of the festival, all in collaboration with the CUZ team.',
+    solution:
+      'To meet these requirements, I worked with precisely dimensioned masks provided by the on-site VJ. These masks were used in ComfyUI to generate animations that aligned perfectly with the LED panel layout. The visuals then went through an upscaling process to achieve a 4D rendering and ensure maximum display quality.',
+    nextProject: undefined,
+    previousProject: 'disney',
   },
 ];
 
@@ -176,10 +260,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             muted
             playsInline
             preload="none"
-            poster="/creations/Disney-cover.jpg"
+            poster={project.coverImage}
             className="size-full object-cover"
           >
-            <source src="/creations/Disney.webm" type="video/webm" />
+            <source src={project.mediaUrl} type="video/webm" />
             Your browser does not support video playback.
           </video>
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -187,11 +271,13 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
         <div className="absolute inset-0 flex flex-col items-center justify-end p-8 text-center md:p-16">
           <h1 className="font-ninna text-4xl font-bold text-white md:text-7xl lg:text-8xl">
-            DisneyLand Paris
+            {project.title}
           </h1>
-          <h2 className="font-ninna text-3xl font-bold text-white md:text-5xl lg:text-6xl">
-            Cast Member Party 2024
-          </h2>
+          {project.slug === 'disney' && (
+            <h2 className="font-ninna text-3xl font-bold text-white md:text-5xl lg:text-6xl">
+              {project.client}
+            </h2>
+          )}
           <p className="mt-4 max-w-2xl text-lg text-white md:text-xl">{project.description}</p>
         </div>
       </div>
@@ -206,14 +292,14 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </a>
 
         <div className="flex gap-4">
-          {/* {project.previousProject && (
+          {project.previousProject && (
             <a
               href={`/projects/${project.previousProject}`}
               className="text-sm font-medium text-neutral-600 hover:text-black md:text-base"
             >
               ← Previous project
             </a>
-          )} */}
+          )}
           {project.nextProject && (
             <a
               href={`/projects/${project.nextProject}`}
@@ -265,7 +351,18 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 {project.client && (
                   <li className="flex justify-between">
                     <span className="text-gray-300">Client:</span>
-                    <span className="text-white">{project.client}</span>
+                    {project.slug === 'cocorico2024' ? (
+                      <a
+                        href="https://www.cocorico-electro.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white hover:opacity-80"
+                      >
+                        {project.client}
+                      </a>
+                    ) : (
+                      <span className="text-white">{project.client}</span>
+                    )}
                   </li>
                 )}
               </ul>
@@ -357,23 +454,25 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </div>
 
         {/* Main media */}
-        <div className="mb-16">
-          <h2 className="mb-8 text-center text-2xl font-bold text-black md:text-3xl">
-            Project showcase
-          </h2>
+        {project.slug === 'disney' && (
+          <div className="mb-16">
+            <h2 className="mb-8 text-center text-2xl font-bold text-black md:text-3xl">
+              Project showcase
+            </h2>
 
-          <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
-            <iframe
-              title="vimeo-player"
-              src="https://player.vimeo.com/video/991471772?h=a2aa9cb1d1"
-              width="640"
-              height="360"
-              frameBorder="0"
-              allowFullScreen
-              className="size-full object-cover"
-            ></iframe>
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
+              <iframe
+                title="vimeo-player"
+                src="https://player.vimeo.com/video/991471772?h=a2aa9cb1d1"
+                width="640"
+                height="360"
+                frameBorder="0"
+                allowFullScreen
+                className="size-full object-cover"
+              ></iframe>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Media gallery */}
         {project.gallery && project.gallery.length > 0 && (

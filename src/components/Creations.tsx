@@ -174,12 +174,12 @@ const CREATIONS = [
     mediaType: 'video' as const,
     mediaRatio: 16 / 9,
   },
-  // {
-  //   slug: 'test',
-  //   mediaUrl: '/creations/test.mp4',
-  //   mediaType: 'video' as const,
-  //   mediaRatio: 9 / 16,
-  // },
+  {
+    slug: 'cocorico2024',
+    mediaUrl: '/creations/Cocorico2024.webm',
+    mediaType: 'video' as const,
+    mediaRatio: 16 / 9,
+  },
   // {
   //   slug: 'test2',
   //   mediaUrl: '/creations/test2.mp4',
