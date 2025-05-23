@@ -148,8 +148,8 @@ const PROJECTS: Project[] = [
     date: 'July 2024',
     duration: '2 weeks',
     client: 'Cocorico Electro',
-    imageUrl: '/creations/cocoricoElectro_2024/GIFCocorico2024_1.gif',
-    coverImage: '/creations/cocoricoElectro_2024/GIFCocorico2024_1.gif',
+    imageUrl: '/creations/Cocorico2024.webm',
+    coverImage: '/creations/Cocorico2024.webm',
     backgroundColor: '#FFFFFF',
     textColor: '#000000',
     mediaType: 'video',
@@ -157,11 +157,7 @@ const PROJECTS: Project[] = [
     seoTitle: 'Cocorico Electro 2024 - IXILOD Portfolio',
     seoDescription:
       'Discover the visual experience project developed for Cocorico Electro Festival in 2024',
-    tools: [
-      { name: 'ComfyUI', icon: ComfyUIIcon },
-      // { name: 'After Effects', icon: AdobeAfterEffectsIcon },
-      // { name: 'Premiere Pro', icon: AdobePremiereProIcon },
-    ],
+    tools: [{ name: 'ComfyUI', icon: ComfyUIIcon }],
     team: [
       {
         name: 'CUZ.',
