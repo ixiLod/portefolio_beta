@@ -261,6 +261,8 @@ const Creations = () => {
                 // title={creation.title}
                 // subtitle={creation.subtitle}
                 scale={[width, height, 1]}
+                title={''}
+                subtitle={''}
               />
             );
           })}
