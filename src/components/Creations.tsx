@@ -258,8 +258,8 @@ const Creations = () => {
                 mediaUrl={creation.mediaUrl}
                 mediaType={creation.mediaType}
                 projectSlug={creation.slug}
-                title={creation.title}
-                subtitle={creation.subtitle}
+                // title={creation.title}
+                // subtitle={creation.subtitle}
                 scale={[width, height, 1]}
               />
             );
