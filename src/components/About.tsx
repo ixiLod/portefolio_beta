@@ -101,6 +101,21 @@ const About = ({ onClose }: ModalProps) => {
           </p>
         </div>
 
+        <div className="mt-6 px-6">
+          <h3 className="mb-2 font-ninna font-semibold text-gray-200">I Speak :</h3>
+          <div className="flex flex-wrap gap-2">
+            <span className="rounded-full bg-white px-3 py-1 text-sm font-medium text-black">
+              French (Native)
+            </span>
+            <span className="rounded-full bg-white px-3 py-1 text-sm font-medium text-black">
+              English (Professional)
+            </span>
+            <span className="rounded-full bg-white px-3 py-1 text-sm font-medium text-black">
+              Spanish (Intermediate)
+            </span>
+          </div>
+        </div>
+
         {Object.entries(ICONS).map(([section, icons]) => (
           <div key={section}>
             <h3 className="mt-8 px-3 font-ninna font-semibold text-gray-200">
