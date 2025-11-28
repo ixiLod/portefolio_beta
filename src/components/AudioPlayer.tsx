@@ -54,10 +54,8 @@ const AudioPlayer = forwardRef<
     getAnalyser: () => analyserRef.current,
     mute: () => {
       if (audioRef.current) {
-        const nextMute = !audioRef.current.muted;
-        audioRef.current.muted = nextMute;
-        audioRef.current.volume = nextMute ? 0 : 1;
-        setIsMuted(nextMute);
+        audioRef.current.muted = !audioRef.current.muted;
+        setIsMuted(!isMuted);
       }
     },
     isMuted: isMuted,
