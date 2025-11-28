@@ -122,7 +122,7 @@ const CreationItem = ({
       </mesh>
 
       {/* Tile Title */}
-      <Html center style={{ pointerEvents: 'none' }}>
+      {/* <Html center style={{ pointerEvents: 'none' }}>
         <div className="flex size-full flex-col items-center justify-center">
           <span
             className="text-center font-ninna text-4xl font-normal tracking-wide text-white md:text-6xl lg:text-7xl"
@@ -169,7 +169,7 @@ const CreationItem = ({
             </span>
           </button>
         </div>
-      </Html>
+      </Html> */}
     </group>
   );
 };
