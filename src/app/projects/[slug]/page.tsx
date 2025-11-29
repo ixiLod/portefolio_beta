@@ -219,6 +219,159 @@ const PROJECTS: Project[] = [
     nextProject: undefined,
     previousProject: 'disney',
   },
+  {
+    slug: 'cocorico2025',
+    title: 'Cocorico Electro 2025',
+    description: 'AI-generated VJ loops for Cocorico Electro Festival 2025',
+    longDescription:
+      'Visuals created for the 2025 edition, with a focus on energetic, seamless-motion VJ loops for the main stage, fully AI/Motion Design powered.',
+    date: 'July 2025',
+    duration: '3 weeks',
+    client: 'Cocorico Electro',
+    imageUrl: '/creations/cocoricoElectro_2025/CocoLoop_00012Reduce.gif',
+    coverImage: '/creations/cocoricoElectro_2025/CocoLoop_00012Reduce.gif',
+    backgroundColor: '#FFFFFF',
+    textColor: '#000000',
+    mediaType: 'video',
+    mediaUrl: '/creations/cocoricoElectro_2025/CocoLoop_00012Reduce.gif',
+    seoTitle: 'Cocorico Electro 2025 - IXILOD Portfolio',
+    seoDescription: 'Discover the VJ loops created for Cocorico Electro 2025.',
+    tools: [{ name: 'ComfyUI', icon: ComfyUIIcon }],
+    team: [
+      // { name: 'CUZ.', role: 'Creative Direction & Art Direction', imageUrl: Cuz },
+      {
+        name: 'IXILOD',
+        role: 'Art Direction & AI Visual Artist & Motion Designer',
+        imageUrl: Ixilod,
+      },
+    ],
+    gallery: [
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2025/CocoLoop_00012Reduce.gif',
+        alt: 'Cocorico Electro 2025 - GIF 1',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2025/CocoLoop_00006Reduce.gif',
+        alt: 'Cocorico Electro 2025 - GIF 2',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2025/CocoLoop_00017Reduce.gif',
+        alt: 'Cocorico Electro 2025 - GIF 3',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2025/CocoLoop_00014Reduce.gif',
+        alt: 'Cocorico Electro 2025 - GIF 4',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2025/CocoLoop_00082Reduce.gif',
+        alt: 'Cocorico Electro 2025 - GIF 5',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2025/CocoLoop_00031Reduce.gif',
+        alt: 'Cocorico Electro 2025 - GIF 6',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2025/CocoLoop_00018Reduce.gif',
+        alt: 'Cocorico Electro 2025 - GIF 7',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2025/CocoLoop_00009Reduce.gif',
+        alt: 'Cocorico Electro 2025 - GIF 8',
+      },
+    ],
+    challenge: 'Create punchy generative loops for a giant LED setup at Cocorico Electro 2025.',
+    solution: 'Mix of AI, motion design and tight collaboration with VJs and the festival team.',
+    nextProject: 'disney2025',
+    previousProject: 'disney',
+  },
+  {
+    slug: 'disney2025',
+    title: 'Disney 2025 - Cast Member Party',
+    description: 'Frozen-inspired VJ loops for Disneyland Paris 2025',
+    longDescription:
+      'Unique generative/frozen-themed VJ content crafted for the 2025 Disneyland Paris Cast Member event.',
+    date: 'June 2025',
+    duration: '2 months',
+    client: 'DisneyLand Paris',
+    imageUrl: '/creations/disney_2025/Disney_frozen_perfectLoop_00015Reduce.gif',
+    coverImage: '/creations/disney_2025/Disney_frozen_perfectLoop_00015Reduce.gif',
+    backgroundColor: '#FFFFFF',
+    textColor: '#000000',
+    mediaType: 'video',
+    mediaUrl: '/creations/disney_2025/Disney_frozen_perfectLoop_00015Reduce.gif',
+    seoTitle: 'Disney Frozen VJ Project 2025 - IXILOD Portfolio',
+    seoDescription:
+      'Explore the exclusive frozen-inspired VJ content made for Disneyland Paris 2025.',
+    tools: [
+      { name: 'ComfyUI', icon: ComfyUIIcon },
+      { name: 'After Effects', icon: AdobeAfterEffectsIcon },
+      { name: 'Premiere Pro', icon: AdobePremiereProIcon },
+    ],
+    team: [
+      // { name: 'CUZ.', role: 'Creative Direction & Art Direction', imageUrl: Cuz },
+      {
+        name: 'IXILOD',
+        role: 'Art Direction & AI Visual Artist & Motion Designer',
+        imageUrl: Ixilod,
+      },
+    ],
+    gallery: [
+      {
+        type: 'gif',
+        url: '/creations/disney_2025/Disney_frozen_perfectLoop_00015Reduce.gif',
+        alt: 'Disney Frozen 2025 - GIF 1',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney_2025/Disney_frozen_perfectLoop_00034Reduce.gif',
+        alt: 'Disney Frozen 2025 - GIF 2',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney_2025/Disney_frozen_perfectLoop_00120Reduce.gif',
+        alt: 'Disney Frozen 2025 - GIF 3',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney_2025/Disney_frozen_perfectLoop_00192.gif',
+        alt: 'Disney Frozen 2025 - GIF 4',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney_2025/Disney_frozen_perfectLoop_00195.gif',
+        alt: 'Disney Frozen 2025 - GIF 5',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney_2025/Disney_frozen_perfectLoop_00233.gif',
+        alt: 'Disney Frozen 2025 - GIF 6',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney_2025/Disney_frozen_perfectLoop_00337.gif',
+        alt: 'Disney Frozen 2025 - GIF 7',
+      },
+      {
+        type: 'gif',
+        url: '/creations/disney_2025/Disney_frozen_perfectLoop_00169Reduce.gif',
+        alt: 'Disney Frozen 2025 - GIF 8',
+      },
+    ],
+    challenge:
+      'Deliver generative, looping frozen-themed VJ content for a grand Cast Member celebration.',
+    solution:
+      'Combination of generative art, After Effects, and on-the-fly feedback with the creative team.',
+    nextProject: 'disney',
+    previousProject: 'cocorico2025',
+  },
 ];
 
 export default function ProjectPage({ params }: { params: { slug: string } }) {
