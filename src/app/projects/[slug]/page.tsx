@@ -5,6 +5,8 @@ import { notFound } from 'next/navigation';
 import ComfyUIIcon from '../../../assets/icons/ComfyUI.png';
 import AdobeAfterEffectsIcon from '../../../assets/icons/Adobe After Effects.png';
 import AdobePremiereProIcon from '../../../assets/icons/Adobe Premiere Pro.png';
+import TopazVideoIcon from '../../../assets/icons/Topaz Video.png';
+
 import Cuz from '../../../assets/icons/cuz.jpeg';
 import Ixilod from '../../../assets/icons/ixilod.jpeg';
 
@@ -75,12 +77,10 @@ const PROJECTS: Project[] = [
     solution:
       'I began by designing masks in After Effects, which I then integrated into a custom ComfyUI workflow. Using reference images curated by the Cuz. Creative studio, I refined the direction based on feedback from the art director. Once approved, I fine-tuned my workflow, optimized details, and generated the videos using a tailored model and prompts. To ensure top-tier quality and seamless display on large LED screens, I upscaled the final visuals to 4K.',
     tools: [
-      {
-        name: 'ComfyUI',
-        icon: ComfyUIIcon,
-      },
+      { name: 'ComfyUI', icon: ComfyUIIcon },
       { name: 'After Effects', icon: AdobeAfterEffectsIcon },
       { name: 'Premiere Pro', icon: AdobePremiereProIcon },
+      { name: 'Topaz Video', icon: TopazVideoIcon },
     ],
     team: [
       {
@@ -157,7 +157,10 @@ const PROJECTS: Project[] = [
     seoTitle: 'Cocorico Electro 2024 - IXILOD Portfolio',
     seoDescription:
       'Discover the visual experience project developed for Cocorico Electro Festival in 2024',
-    tools: [{ name: 'ComfyUI', icon: ComfyUIIcon }],
+    tools: [
+      { name: 'ComfyUI', icon: ComfyUIIcon },
+      { name: 'Topaz Video', icon: TopazVideoIcon },
+    ],
     team: [
       {
         name: 'CUZ.',
@@ -236,7 +239,10 @@ const PROJECTS: Project[] = [
     mediaUrl: '/creations/cocoricoElectro_2025/CocoLoop_00012Reduce.gif',
     seoTitle: 'Cocorico Electro 2025 - IXILOD Portfolio',
     seoDescription: 'Discover the VJ loops created for Cocorico Electro 2025.',
-    tools: [{ name: 'ComfyUI', icon: ComfyUIIcon }],
+    tools: [
+      { name: 'ComfyUI', icon: ComfyUIIcon },
+      { name: 'Topaz Video', icon: TopazVideoIcon },
+    ],
     team: [
       // { name: 'CUZ.', role: 'Creative Direction & Art Direction', imageUrl: Cuz },
       {
@@ -314,6 +320,7 @@ const PROJECTS: Project[] = [
       { name: 'ComfyUI', icon: ComfyUIIcon },
       { name: 'After Effects', icon: AdobeAfterEffectsIcon },
       { name: 'Premiere Pro', icon: AdobePremiereProIcon },
+      { name: 'Topaz Video', icon: TopazVideoIcon },
     ],
     team: [
       // { name: 'CUZ.', role: 'Creative Direction & Art Direction', imageUrl: Cuz },

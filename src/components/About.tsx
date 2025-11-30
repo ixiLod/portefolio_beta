@@ -22,6 +22,8 @@ import SplineIcon from '../assets/icons/Spline.png';
 import GitHubIcon from '../assets/icons/Github.png';
 import SupabaseIcon from '../assets/icons/Supabase.png';
 import DockerIcon from '../assets/icons/Docker.png';
+import TopazVideoIcon from '../assets/icons/Topaz Video.png';
+import FlowframesIcon from '../assets/icons/Flowframes.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
@@ -43,6 +45,8 @@ const ICONS = {
     { src: AdobePremiereProIcon, alt: 'Adobe Premiere' },
     { src: AdobeAfterEffectsIcon, alt: 'Adobe After Effects' },
     { src: AdobePhotoshopIcon, alt: 'Adobe Photoshop' },
+    { src: TopazVideoIcon, alt: 'Topaz Video' },
+    { src: FlowframesIcon, alt: 'Flowframes' },
     { src: ComfyUIIcon, alt: 'ComfyUI' },
     { src: TouchDesignerIcon, alt: 'TouchDesigner' },
     { src: BlenderIcon, alt: 'Blender' },
