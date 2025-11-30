@@ -193,8 +193,8 @@ const CREATIONS = [
   },
   {
     slug: 'cocorico2025',
-    mediaUrl: '/creations/cocoricoElectro_2025/CocoLoop_00006Reduce.gif',
-    mediaType: 'gif' as const,
+    mediaUrl: '/creations/cocorico2025.png',
+    mediaType: 'image' as const,
     mediaRatio: 16 / 9,
   },
   {
