@@ -32,6 +32,7 @@ interface ProjectMedia {
 interface Project {
   slug: string;
   title?: string;
+  subtitle?: string;
   description: string;
   longDescription?: string;
   date: string;
@@ -57,6 +58,8 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     slug: 'disney',
+    title: 'Disney Land Paris',
+    subtitle: 'Cast Member Party 2024',
     description: "AI-generated VJ loops for Disney's stage visuals",
     longDescription:
       'A creative collaboration with the Cuz. team and Disneyland Paris to produce about 30 dynamic VJ loops for the 2024 Cast Member Party. Inspired by The Lion King, these visuals were designed to elevate the DJ stage experience with bold and immersive animations.',
@@ -137,7 +140,6 @@ const PROJECTS: Project[] = [
       },
     ],
     nextProject: 'cocorico2024',
-    // previousProject: 'test2',
   },
   {
     slug: 'cocorico2024',
@@ -219,7 +221,7 @@ const PROJECTS: Project[] = [
       'The challenge here was to create impactful visuals for a composition of LED panels. I had to adapt the shape of my visuals to the panel structure to achieve an immersive and precisely scaled result, while respecting the artistic direction of the festival, all in collaboration with the CUZ team.',
     solution:
       'To meet these requirements, I worked with precisely dimensioned masks provided by the on-site VJ. These masks were used in ComfyUI to generate animations that aligned perfectly with the LED panel layout. The visuals then went through an upscaling process to achieve a 4D rendering and ensure maximum display quality.',
-    nextProject: undefined,
+    nextProject: 'cocorico2025',
     previousProject: 'disney',
   },
   {
@@ -300,8 +302,9 @@ const PROJECTS: Project[] = [
   },
   {
     slug: 'disney2025',
-    title: 'Disney 2025 - Cast Member Party',
-    description: 'Frozen-inspired VJ loops for Disneyland Paris 2025',
+    title: 'Disney Land Paris',
+    subtitle: 'Frozen-inspired VJ loops 2025',
+    description: "AI-generated VJ loops for Disney's stage visuals",
     longDescription:
       'Unique generative/frozen-themed VJ content crafted for the 2025 Disneyland Paris Cast Member event.',
     date: 'June 2025',
@@ -429,9 +432,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <h1 className="font-ninna text-4xl font-bold text-white md:text-7xl lg:text-8xl">
             {project.title}
           </h1>
-          {project.slug === 'disney' && (
+          {(project.slug === 'disney' || project.slug === 'disney2025') && (
             <h2 className="font-ninna text-3xl font-bold text-white md:text-5xl lg:text-6xl">
-              {project.client}
+              {project.subtitle}
             </h2>
           )}
           <p className="mt-4 max-w-2xl text-lg text-white md:text-xl">{project.description}</p>
