@@ -191,12 +191,18 @@ const CREATIONS = [
     // title: 'Cocorico\nElectro',
     // subtitle: '2024',
   },
-  // {
-  //   slug: 'test2',
-  //   mediaUrl: '/creations/test2.mp4',
-  //   mediaType: 'video' as const,
-  //   mediaRatio: 1,
-  // },
+  {
+    slug: 'cocorico2025',
+    mediaUrl: '/creations/cocoricoElectro_2025/CocoLoop_00006Reduce.gif',
+    mediaType: 'gif' as const,
+    mediaRatio: 16 / 9,
+  },
+  {
+    slug: 'disney2025',
+    mediaUrl: '/creations/Disney2025.webm',
+    mediaType: 'video' as const,
+    mediaRatio: 16 / 9,
+  },
 ];
 
 const Creations = () => {
