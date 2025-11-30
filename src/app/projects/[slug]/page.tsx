@@ -512,9 +512,19 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 {project.client && (
                   <li className="flex justify-between">
                     <span className="text-gray-300">Client:</span>
+
                     {project.slug === 'cocorico2024' || project.slug === 'cocorico2025' ? (
                       <a
                         href="https://www.cocorico-electro.fr/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white hover:opacity-80"
+                      >
+                        {project.client}
+                      </a>
+                    ) : project.slug === 'disney' || project.slug === 'disney2025' ? (
+                      <a
+                        href="https://www.disneylandparis.com/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white hover:opacity-80"
