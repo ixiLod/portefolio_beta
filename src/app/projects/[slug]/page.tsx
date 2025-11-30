@@ -308,7 +308,7 @@ const PROJECTS: Project[] = [
     subtitle: 'Frozen-inspired VJ loops 2025',
     description: "AI-generated VJ loops for Disney's stage visuals",
     longDescription:
-      'For the 2025 Disney Land Paris edition, the project focused on creating frozen inspired VJ loops for a large stage setup. Working closely with the on site VJ, the artistic direction aimed to capture the feeling of Disney’s winter universes, evoking the spirit of Frozen while keeping a modern and generative visual identity. The goal was to deliver immersive and seamless loops that supported both the music and the overall atmosphere.',
+      'For the 2025 Disney Land Paris edition, the project focused on creating 90 frozen inspired VJ loops for a large stage setup. Working closely with the on site VJ, the artistic direction aimed to capture the feeling of Disney’s winter universes, evoking the spirit of Frozen while keeping a modern and generative visual identity. The goal was to deliver immersive and seamless loops that supported both the music and the overall atmosphere.',
     date: 'November 2025',
     duration: '1 week',
     client: 'DisneyLand Paris',
