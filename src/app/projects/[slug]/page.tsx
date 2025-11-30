@@ -317,7 +317,7 @@ const PROJECTS: Project[] = [
     backgroundColor: '#FFFFFF',
     textColor: '#000000',
     mediaType: 'video',
-    mediaUrl: '/creations/disney_2025/Disney_frozen_perfectLoop_00015Reduce.gif',
+    mediaUrl: '/creations/Disney2025.webm',
     seoTitle: 'Disney Frozen VJ Project 2025 - IXILOD Portfolio',
     seoDescription:
       'Explore the exclusive frozen-inspired VJ content made for Disneyland Paris 2025.',
