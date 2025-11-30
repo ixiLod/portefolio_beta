@@ -64,7 +64,7 @@ const PROJECTS: Project[] = [
     longDescription:
       'A creative collaboration with the Cuz. team and Disneyland Paris to produce about 30 dynamic VJ loops for the 2024 Cast Member Party. Inspired by The Lion King, these visuals were designed to elevate the DJ stage experience with bold and immersive animations.',
     date: 'June 2024',
-    duration: '2 months',
+    duration: '5 weeks',
     client: 'DisneyLand Paris',
     imageUrl: '/creations/Disney.jpg',
     coverImage: '/creations/Disney-cover.jpg',
@@ -229,7 +229,7 @@ const PROJECTS: Project[] = [
     title: 'Cocorico Electro 2025',
     description: 'AI-generated VJ loops for Cocorico Electro Festival 2025',
     longDescription:
-      'Visuals created for the 2025 edition, with a focus on energetic, seamless-motion VJ loops for the main stage, fully AI/Motion Design powered.',
+      'For the 2025 edition of Cocorico Electro, the project focused on creating energetic generative VJ loops for a stage with a unique LED setup, including an arch and a central 3D cube with three visible faces. I worked directly with the on-site VJ to ensure the visuals matched the stage layout while keeping the festival’s dynamic identity.',
     date: 'July 2025',
     duration: '3 weeks',
     client: 'Cocorico Electro',
@@ -295,8 +295,10 @@ const PROJECTS: Project[] = [
         alt: 'Cocorico Electro 2025 - GIF 8',
       },
     ],
-    challenge: 'Create punchy generative loops for a giant LED setup at Cocorico Electro 2025.',
-    solution: 'Mix of AI, motion design and tight collaboration with VJs and the festival team.',
+    challenge:
+      'The main challenge was adapting the visuals to this unusual LED configuration. The combination of the arch and the cube required precise alignment and adjustments to make sure the loops fit the shapes correctly and looked cohesive on the entire setup.',
+    solution:
+      'I collaborated closely with the VJ to define the artistic direction. Using masks tailored to the exact screen shapes, I generated the loops with a personal ComfyUI workflow to fit the layout perfectly. Afterwards, I used Topaz Video to interpolate and optimize the loops, ensuring smooth playback, slow motion effects, and finally upscaled everything to 4K for high-quality display on the festival’s large LED screens.',
     nextProject: 'disney2025',
     previousProject: 'disney',
   },
@@ -306,9 +308,9 @@ const PROJECTS: Project[] = [
     subtitle: 'Frozen-inspired VJ loops 2025',
     description: "AI-generated VJ loops for Disney's stage visuals",
     longDescription:
-      'Unique generative/frozen-themed VJ content crafted for the 2025 Disneyland Paris Cast Member event.',
-    date: 'June 2025',
-    duration: '2 months',
+      'For the 2025 Disney Land Paris edition, the project focused on creating frozen inspired VJ loops for a large stage setup. Working closely with the on site VJ, the artistic direction aimed to capture the feeling of Disney’s winter universes, evoking the spirit of Frozen while keeping a modern and generative visual identity. The goal was to deliver immersive and seamless loops that supported both the music and the overall atmosphere.',
+    date: 'November 2025',
+    duration: '1 week',
     client: 'DisneyLand Paris',
     imageUrl: '/creations/disney_2025/Disney_frozen_perfectLoop_00015Reduce.gif',
     coverImage: '/creations/disney_2025/Disney_frozen_perfectLoop_00015Reduce.gif',
@@ -376,9 +378,9 @@ const PROJECTS: Project[] = [
       },
     ],
     challenge:
-      'Deliver generative, looping frozen-themed VJ content for a grand Cast Member celebration.',
+      'The main challenge was to create visuals that suggested a crystalline and winter themed world. The look needed to feel familiar yet original. Another important aspect was ensuring visual consistency across multiple loops while keeping them flexible for VJ performance.',
     solution:
-      'Combination of generative art, After Effects, and on-the-fly feedback with the creative team.',
+      'To achieve this, I created all visuals in a 16:9 format using custom ComfyUI workflows based on the winter mood defined with the VJ. I designed masks in Premiere Pro and After Effects to guide the composition and reinforce the intended atmosphere. Once the loops were generated, I used temporal interpolation to convert everything to 60 FPS and reduce the motion speed for a smoother result. All loops were then upscaled to 4K with Topaz Video to ensure perfect clarity on the event’s large LED screens.',
     nextProject: 'disney',
     previousProject: 'cocorico2025',
   },
