@@ -193,8 +193,8 @@ const CREATIONS = [
   },
   {
     slug: 'cocorico2025',
-    mediaUrl: '/creations/cocorico2025.png',
-    mediaType: 'image' as const,
+    mediaUrl: '/creations/Cocorico2025.webm',
+    mediaType: 'video' as const,
     mediaRatio: 16 / 9,
   },
   {

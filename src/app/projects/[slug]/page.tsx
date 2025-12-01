@@ -238,7 +238,7 @@ const PROJECTS: Project[] = [
     backgroundColor: '#FFFFFF',
     textColor: '#000000',
     mediaType: 'video',
-    mediaUrl: '/creations/cocoricoElectro_2025/CocoLoop_00012Reduce.gif',
+    mediaUrl: '/creations/Cocorico2025.webm',
     seoTitle: 'Cocorico Electro 2025 - IXILOD Portfolio',
     seoDescription: 'Discover the VJ loops created for Cocorico Electro 2025.',
     tools: [
