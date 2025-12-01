@@ -662,7 +662,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                         <img
                           src={media.url}
                           alt={media.alt}
-                          className="h-64 w-full object-cover md:h-80"
+                          className="h-auto w-full bg-black object-contain"
                         />
                       )}
 
@@ -670,7 +670,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                         <img
                           src={media.url}
                           alt={media.alt}
-                          className="h-64 w-full object-cover md:h-80"
+                          className="h-auto w-full bg-black object-contain"
                         />
                       )}
                     </div>
