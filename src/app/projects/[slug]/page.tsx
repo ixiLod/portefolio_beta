@@ -536,7 +536,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <div className="sticky top-0 z-40 flex w-full items-center justify-between bg-white/40 p-4 backdrop-blur-md">
         <a
           href="/?section=creations"
-          className="flex items-center text-sm font-semibold text-neutral-900 transition-colors [text-shadow:0_0_20px_rgba(255,255,255,0.95),0_1px_3px_rgba(0,0,0,0.35)] hover:text-black md:text-base"
+          className="flex items-center text-sm font-semibold text-neutral-900 transition-colors hover:text-black md:text-base"
         >
           ← Back to creations
         </a>
@@ -545,7 +545,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           {project.previousProject && (
             <a
               href={`/projects/${project.previousProject}`}
-              className="text-sm font-semibold text-neutral-900 transition-colors [text-shadow:0_0_20px_rgba(255,255,255,0.95),0_1px_3px_rgba(0,0,0,0.35)] hover:text-black md:text-base"
+              className="text-sm font-semibold text-neutral-900 transition-colors hover:text-black md:text-base"
             >
               ← Previous project
             </a>
@@ -553,7 +553,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           {project.nextProject && (
             <a
               href={`/projects/${project.nextProject}`}
-              className="text-sm font-semibold text-neutral-900 transition-colors [text-shadow:0_0_20px_rgba(255,255,255,0.95),0_1px_3px_rgba(0,0,0,0.35)] hover:text-black md:text-base"
+              className="text-sm font-semibold text-neutral-900 transition-colors hover:text-black md:text-base"
             >
               Next project →
             </a>
