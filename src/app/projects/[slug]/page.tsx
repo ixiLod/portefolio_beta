@@ -53,6 +53,7 @@ interface Project {
   solution?: string;
   nextProject?: string;
   previousProject?: string;
+  gallerySingleColumn?: boolean;
 }
 
 const PROJECTS: Project[] = [
@@ -140,6 +141,7 @@ const PROJECTS: Project[] = [
       },
     ],
     nextProject: 'cocorico2024',
+    previousProject: 'cocorico2026',
   },
   {
     slug: 'cocorico2024',
@@ -147,7 +149,7 @@ const PROJECTS: Project[] = [
     description: 'AI-generated VJ loops for Cocorico Electro Festival',
     longDescription:
       'Creation of generative visuals and VJ loops for the Cocorico Electro Festival 2024. A project combining artificial intelligence, motion design, and art direction to enhance the main stage of the festival.',
-    date: 'July 2024',
+    date: 'June-July 2024',
     duration: '2 weeks',
     client: 'Cocorico Electro',
     imageUrl: '/creations/Cocorico2024.webm',
@@ -230,7 +232,7 @@ const PROJECTS: Project[] = [
     description: 'AI-generated VJ loops for Cocorico Electro Festival 2025',
     longDescription:
       'For the 2025 edition of Cocorico Electro, the project focused on creating energetic generative VJ loops for a stage with a unique LED setup, including an arch and a central 3D cube with three visible faces. I worked directly with the on-site VJ to ensure the visuals matched the stage layout while keeping the festival’s dynamic identity.',
-    date: 'July 2025',
+    date: 'June-July 2025',
     duration: '3 weeks',
     client: 'Cocorico Electro',
     imageUrl: '/creations/cocoricoElectro_2025/CocoLoop_00012Reduce.gif',
@@ -381,8 +383,87 @@ const PROJECTS: Project[] = [
       'The main challenge was to create visuals that suggested a crystalline and winter themed world. The look needed to feel familiar yet original. Another important aspect was ensuring visual consistency across multiple loops while keeping them flexible for VJ performance.',
     solution:
       'To achieve this, I created all visuals in a 16:9 format using custom ComfyUI workflows based on the winter mood defined with the VJ. I designed masks in Premiere Pro and After Effects to guide the composition and reinforce the intended atmosphere. Once the loops were generated, I used temporal interpolation to convert everything to 60 FPS and reduce the motion speed for a smoother result. All loops were then upscaled to 4K with Topaz Video to ensure perfect clarity on the event’s large LED screens.',
-    nextProject: 'disney',
+    nextProject: 'cocorico2026',
     previousProject: 'cocorico2025',
+  },
+  {
+    slug: 'cocorico2026',
+    title: 'Cocorico Electro 2026',
+    description: 'AI-generated VJ loops for Cocorico Electro Festival 2026',
+    longDescription:
+      'This year, I had the opportunity to collaborate once again with the on-site VJ responsible for Cocorico Electro. We worked closely together: he provided me with the appropriate dimensions, as well as templates, allowing me to create animations for the LED panels of the main stage. This was a completely unique extra-wide format, featuring a fully open stage design with a view of the Château de La Ferté in the background.',
+    date: 'June-July 2026',
+    duration: '3 weeks',
+    client: 'Cocorico Electro',
+    imageUrl: '/creations/cocoricoElectro_2026/Cocorico2026_1.gif',
+    coverImage: '/creations/cocoricoElectro_2026/Cocorico2026_1.gif',
+    backgroundColor: '#FFFFFF',
+    textColor: '#000000',
+    mediaType: 'video',
+    mediaUrl: '/creations/Cocorico2026.webm',
+    seoTitle: 'Cocorico Electro 2026 - IXILOD Portfolio',
+    seoDescription: 'Discover the VJ loops created for Cocorico Electro 2026.',
+    gallerySingleColumn: true,
+    tools: [
+      { name: 'ComfyUI', icon: ComfyUIIcon },
+      { name: 'Topaz Video', icon: TopazVideoIcon },
+      { name: 'Premiere Pro', icon: AdobePremiereProIcon },
+    ],
+    team: [
+      {
+        name: 'IXILOD',
+        role: 'Art Direction & AI Visual Artist & Motion Designer',
+        imageUrl: Ixilod,
+      },
+    ],
+    gallery: [
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2026/Cocorico2026_1.gif',
+        alt: 'Cocorico Electro 2026 - GIF 1',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2026/Cocorico2026_2.gif',
+        alt: 'Cocorico Electro 2026 - GIF 2',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2026/Cocorico2026_5.gif',
+        alt: 'Cocorico Electro 2026 - GIF 3',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2026/Cocorico2026_6.gif',
+        alt: 'Cocorico Electro 2026 - GIF 4',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2026/Cocorico2026_3.gif',
+        alt: 'Cocorico Electro 2026 - GIF 5',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2026/Cocorico2026_4.gif',
+        alt: 'Cocorico Electro 2026 - GIF 6',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2026/Cocorico2026_7.gif',
+        alt: 'Cocorico Electro 2026 - GIF 7',
+      },
+      {
+        type: 'gif',
+        url: '/creations/cocoricoElectro_2026/Cocorico2026_8.gif',
+        alt: 'Cocorico Electro 2026 - GIF 8',
+      },
+    ],
+    challenge:
+      'The main challenge was adapting my AI model to a completely unconventional format. It required a significant amount of adjustments to ensure that everything remained perfectly coherent, both visually and physically.\n\nThe panel dimensions exceeded a 7:2 aspect ratio format by 7%, which is an extremely rare format. And when it comes to AI generation, rarity often means reduced efficiency and consistency. The format itself was therefore the real challenge.',
+    solution:
+      'After numerous tests and adjustments, I was finally able to achieve an appropriate result by using a carefully fine-tuned triple upscaling workflow. I slightly stretched the format in order to maintain maximum coherence during the AI generation process, while staying as close as possible to the original model’s native format.',
+    nextProject: 'disney',
+    previousProject: 'disney2025',
   },
 ];
 
@@ -393,16 +474,16 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     return notFound();
   }
 
-  // Fonction pour grouper les médias par paires pour la galerie
-  const getMediaGroups = (media: ProjectMedia[] = []) => {
+  const getMediaGroups = (media: ProjectMedia[] = [], singleColumn = false) => {
+    const groupSize = singleColumn ? 1 : 2;
     const groups = [];
-    for (let i = 0; i < media.length; i += 2) {
-      groups.push(media.slice(i, i + 2));
+    for (let i = 0; i < media.length; i += groupSize) {
+      groups.push(media.slice(i, i + groupSize));
     }
     return groups;
   };
 
-  const mediaGroups = getMediaGroups(project.gallery);
+  const mediaGroups = getMediaGroups(project.gallery, project.gallerySingleColumn);
 
   return (
     <div
@@ -415,18 +496,26 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {/* Hero Section with video */}
       <div className="relative h-[50vh] w-full md:h-[70vh]">
         <div className="absolute inset-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="none"
-            poster={project.coverImage}
-            className="size-full object-cover"
-          >
-            <source src={project.mediaUrl} type="video/webm" />
-            Your browser does not support video playback.
-          </video>
+          {project.mediaUrl.endsWith('.gif') ? (
+            <img
+              src={project.mediaUrl}
+              alt={project.title ?? project.description}
+              className="size-full object-cover"
+            />
+          ) : (
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="none"
+              poster={project.coverImage}
+              className="size-full object-cover"
+            >
+              <source src={project.mediaUrl} type="video/webm" />
+              Your browser does not support video playback.
+            </video>
+          )}
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         </div>
 
@@ -513,7 +602,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                   <li className="flex justify-between">
                     <span className="text-gray-300">Client:</span>
 
-                    {project.slug === 'cocorico2024' || project.slug === 'cocorico2025' ? (
+                    {project.slug === 'cocorico2024' ||
+                    project.slug === 'cocorico2025' ||
+                    project.slug === 'cocorico2026' ? (
                       <a
                         href="https://www.cocorico-electro.fr/"
                         target="_blank"
@@ -652,7 +743,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
             <div className="space-y-8">
               {mediaGroups.map((group, groupIndex) => (
-                <div key={groupIndex} className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                <div
+                  key={groupIndex}
+                  className={`grid grid-cols-1 gap-8${project.gallerySingleColumn ? '' : ' md:grid-cols-2'}`}
+                >
                   {group.map((media, mediaIndex) => (
                     <div
                       key={mediaIndex}

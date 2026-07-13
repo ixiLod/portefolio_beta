@@ -203,6 +203,12 @@ const CREATIONS = [
     mediaType: 'video' as const,
     mediaRatio: 16 / 9,
   },
+  {
+    slug: 'cocorico2026',
+    mediaUrl: '/creations/Cocorico2026.webm',
+    mediaType: 'video' as const,
+    mediaRatio: 7 / 2,
+  },
 ];
 
 const Creations = () => {
