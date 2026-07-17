@@ -9,7 +9,7 @@ import TopazVideoIcon from '../../../assets/icons/Topaz Video.png';
 
 import Cuz from '../../../assets/icons/cuz.jpeg';
 import Ixilod from '../../../assets/icons/ixilod.jpeg';
-
+import Sylvain from '../../../assets/icons/Sylvain.png';
 import { StaticImageData } from 'next/image';
 
 interface ProjectTeamMember {
@@ -97,6 +97,11 @@ const PROJECTS: Project[] = [
         role: 'AI Visual Artist & Motion Designer',
         imageUrl: Ixilod,
       },
+      {
+        name: 'Seel20',
+        role: 'On-site VJ & Motion Designer & Selection',
+        imageUrl: Sylvain,
+      },
     ],
     gallery: [
       {
@@ -176,6 +181,11 @@ const PROJECTS: Project[] = [
         role: 'AI Visual Artist & Motion Designer',
         imageUrl: Ixilod,
       },
+      {
+        name: 'Seel20',
+        role: 'On-site VJ & Motion Designer & Selection',
+        imageUrl: Sylvain,
+      },
     ],
     gallery: [
       {
@@ -253,6 +263,11 @@ const PROJECTS: Project[] = [
         name: 'IXILOD',
         role: 'Art Direction & AI Visual Artist & Motion Designer',
         imageUrl: Ixilod,
+      },
+      {
+        name: 'Seel20',
+        role: 'On-site VJ & Motion Designer & Selection',
+        imageUrl: Sylvain,
       },
     ],
     gallery: [
@@ -336,6 +351,11 @@ const PROJECTS: Project[] = [
         role: 'Art Direction & AI Visual Artist & Motion Designer',
         imageUrl: Ixilod,
       },
+      {
+        name: 'Seel20',
+        role: 'On-site VJ & Motion Designer & Selection',
+        imageUrl: Sylvain,
+      },
     ],
     gallery: [
       {
@@ -414,6 +434,11 @@ const PROJECTS: Project[] = [
         name: 'IXILOD',
         role: 'Art Direction & AI Visual Artist & Motion Designer',
         imageUrl: Ixilod,
+      },
+      {
+        name: 'Seel20',
+        role: 'On-site VJ & Motion Designer & Selection',
+        imageUrl: Sylvain,
       },
     ],
     gallery: [
@@ -664,6 +689,31 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                       {member.name === 'CUZ.' ? (
                         <a
                           href="https://www.cuzmade.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center transition-opacity hover:opacity-80"
+                        >
+                          {member.imageUrl && (
+                            <div className="mr-3 size-10 overflow-hidden rounded-full">
+                              <img
+                                src={
+                                  typeof member.imageUrl === 'string'
+                                    ? member.imageUrl
+                                    : member.imageUrl.src
+                                }
+                                alt={member.name}
+                                className="size-full object-cover"
+                              />
+                            </div>
+                          )}
+                          <div>
+                            <p className="font-medium text-white">{member.name}</p>
+                            <p className="text-sm text-gray-300">{member.role}</p>
+                          </div>
+                        </a>
+                      ) : member.name === 'Seel20' ? (
+                        <a
+                          href="https://www.instagram.com/my_champion_insta"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center transition-opacity hover:opacity-80"
