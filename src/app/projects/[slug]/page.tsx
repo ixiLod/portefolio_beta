@@ -711,7 +711,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                             <p className="text-sm text-gray-300">{member.role}</p>
                           </div>
                         </a>
-                      ) : member.name === 'Seel20' ? (
+                      ) : member.name === 'SEEL20' ? (
                         <a
                           href="https://www.instagram.com/my_champion_insta"
                           target="_blank"
