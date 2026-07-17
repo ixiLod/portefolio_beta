@@ -16,6 +16,15 @@
   font-style: normal;
 }
 
+html,
+body {
+  overscroll-behavior: none;
+}
+
+html {
+  background: white;
+}
+
 body {
   color: #ededed;
   background: #0a0a0a;
