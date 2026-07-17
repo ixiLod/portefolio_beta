@@ -98,7 +98,7 @@ const PROJECTS: Project[] = [
         imageUrl: Ixilod,
       },
       {
-        name: 'Seel20',
+        name: 'SEEL20',
         role: 'On-site VJ & Motion Designer & Selection',
         imageUrl: Sylvain,
       },
@@ -182,7 +182,7 @@ const PROJECTS: Project[] = [
         imageUrl: Ixilod,
       },
       {
-        name: 'Seel20',
+        name: 'SEEL20',
         role: 'On-site VJ & Motion Designer & Selection',
         imageUrl: Sylvain,
       },
@@ -265,7 +265,7 @@ const PROJECTS: Project[] = [
         imageUrl: Ixilod,
       },
       {
-        name: 'Seel20',
+        name: 'SEEL20',
         role: 'On-site VJ & Motion Designer & Selection',
         imageUrl: Sylvain,
       },
@@ -352,7 +352,7 @@ const PROJECTS: Project[] = [
         imageUrl: Ixilod,
       },
       {
-        name: 'Seel20',
+        name: 'SEEL20',
         role: 'On-site VJ & Motion Designer & Selection',
         imageUrl: Sylvain,
       },
@@ -436,7 +436,7 @@ const PROJECTS: Project[] = [
         imageUrl: Ixilod,
       },
       {
-        name: 'Seel20',
+        name: 'SEEL20',
         role: 'On-site VJ & Motion Designer & Selection',
         imageUrl: Sylvain,
       },
