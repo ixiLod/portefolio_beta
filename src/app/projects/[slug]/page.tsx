@@ -533,7 +533,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       </div>
 
       {/* Navigation */}
-      <div className="sticky top-0 z-40 flex w-full items-center justify-between bg-white/30 p-4 backdrop-blur-md">
+      <div className="sticky top-0 z-40 flex w-full items-center justify-between bg-white/40 p-4 backdrop-blur-md">
         <a
           href="/?section=creations"
           className="flex items-center text-sm font-semibold text-neutral-900 transition-colors hover:text-black md:text-base"
