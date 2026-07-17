@@ -541,7 +541,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               Your browser does not support video playback.
             </video>
           )}
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <div className="absolute inset-0 bg-white bg-opacity-50"></div>
         </div>
 
         <div className="absolute inset-0 flex flex-col items-center justify-end p-8 text-center md:p-16">
@@ -798,15 +798,12 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                   className={`grid grid-cols-1 gap-8${project.gallerySingleColumn ? '' : ' md:grid-cols-2'}`}
                 >
                   {group.map((media, mediaIndex) => (
-                    <div
-                      key={mediaIndex}
-                      className="overflow-hidden rounded-lg bg-gray-100 shadow-lg"
-                    >
+                    <div key={mediaIndex} className="overflow-hidden rounded-lg bg-white shadow-lg">
                       {media.type === 'image' && (
                         <img
                           src={media.url}
                           alt={media.alt}
-                          className="h-auto w-full bg-black object-contain"
+                          className="h-auto w-full object-contain"
                         />
                       )}
 
@@ -814,7 +811,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                         <img
                           src={media.url}
                           alt={media.alt}
-                          className="h-auto w-full bg-black object-contain"
+                          className="h-auto w-full object-contain"
                         />
                       )}
                     </div>
