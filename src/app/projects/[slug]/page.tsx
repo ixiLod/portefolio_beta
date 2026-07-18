@@ -837,7 +837,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </div>
 
         {/* Project navigation (mobile version) */}
-        <div className="mt-12 flex flex-col gap-4 md:hidden">
+        {/* <div className="mt-12 flex flex-col gap-4 md:hidden">
           {project.nextProject && (
             <a
               href={`/projects/${project.nextProject}`}
@@ -846,7 +846,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               Next project →
             </a>
           )}
-        </div>
+        </div> */}
       </div>
 
       {/* Footer */}
