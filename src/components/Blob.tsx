@@ -133,9 +133,9 @@ const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
         attach="material"
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
-        uniforms={{
-          uTime: { value: 0 },
-        }}
+        uniforms={{ uTime: { value: 0 } }}
+        transparent
+        depthWrite={false}
         wireframe={false}
       />
     </Sphere>
