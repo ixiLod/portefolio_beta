@@ -65,7 +65,7 @@ const ICONS = {
 const About = ({ onClose }: ModalProps) => {
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-xl"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 px-3 py-[max(0.75rem,env(safe-area-inset-top))] pb-[max(5rem,env(safe-area-inset-bottom))] backdrop-blur-xl"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -75,7 +75,7 @@ const About = ({ onClose }: ModalProps) => {
       aria-modal="true"
     >
       <motion.div
-        className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg p-4 shadow-lg md:w-3/4"
+        className="relative flex max-h-full w-full max-w-2xl flex-col overflow-hidden rounded-lg shadow-lg md:w-3/4"
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
         initial={{ scale: 0.5, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -83,70 +83,74 @@ const About = ({ onClose }: ModalProps) => {
         transition={{ type: 'spring', damping: 20, stiffness: 300, duration: 0.4 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between">
+        <div className="flex shrink-0 items-start justify-between p-4">
           <h2 id="about-title" className="my-4 px-2 font-ninna text-xl font-bold text-gray-200">
             About
           </h2>
           <button
+            type="button"
             onClick={onClose}
-            className="-translate-y-2 translate-x-2 text-white transition duration-300 ease-in-out hover:text-gray-400"
+            className="flex size-11 -translate-y-2 translate-x-2 items-center justify-center text-white transition duration-300 ease-in-out hover:text-gray-400"
             aria-label="Fermer la fenêtre À propos"
           >
             <FontAwesomeIcon icon={faCircleXmark} className="text-2xl opacity-10" />
           </button>
         </div>
-        <div className="mt-4 space-y-4 px-6 font-neuemontreal text-gray-300">
-          <p>
-            Self-taught and passionate about visual arts, music, and programming, I am deeply
-            convinced that art and technology are intimately connected. My goal is to combine these
-            passions to create unique and captivating visual experiences, whether through
-            installations or interactive videos, artistic websites, or other forms of creative
-            expression.
-          </p>
-        </div>
 
-        <div className="mt-6 px-6">
-          <h3 className="mb-2 font-ninna font-semibold text-gray-200">I Speak :</h3>
-          <div className="flex flex-wrap gap-2">
-            <span className="rounded-full bg-white px-3 py-1 text-sm font-medium text-black">
-              French (Native)
-            </span>
-            <span className="rounded-full bg-white px-3 py-1 text-sm font-medium text-black">
-              English (Professional)
-            </span>
-            <span className="rounded-full bg-white px-3 py-1 text-sm font-medium text-black">
-              Spanish (Intermediate)
-            </span>
+        <div className="overflow-y-auto px-4 pb-4">
+          <div className="mt-4 space-y-4 px-6 font-neuemontreal text-gray-300">
+            <p>
+              Self-taught and passionate about visual arts, music, and programming, I am deeply
+              convinced that art and technology are intimately connected. My goal is to combine
+              these passions to create unique and captivating visual experiences, whether through
+              installations or interactive videos, artistic websites, or other forms of creative
+              expression.
+            </p>
           </div>
-        </div>
 
-        {Object.entries(ICONS).map(([section, icons]) => (
-          <div key={section}>
-            <h3 className="mt-8 px-3 font-ninna font-semibold text-gray-200">
-              {`My ${section} :`}
-            </h3>
-            <div className="mb-4 mt-2 flex flex-wrap gap-2 px-6">
-              {icons.map(({ src, alt }) => (
-                <Tooltip key={`${section}-${alt}`} text={alt}>
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                    className="relative size-10"
-                  >
-                    <Image
-                      src={src}
-                      alt={alt}
-                      fill
-                      sizes="(max-width: 640px) 40px, (max-width: 768px) 50px, 40px"
-                      style={{ objectFit: 'contain' }}
-                    />
-                  </motion.div>
-                </Tooltip>
-              ))}
+          <div className="mt-6 px-6">
+            <h3 className="mb-2 font-ninna font-semibold text-gray-200">I Speak :</h3>
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-full bg-white px-3 py-1 text-sm font-medium text-black">
+                French (Native)
+              </span>
+              <span className="rounded-full bg-white px-3 py-1 text-sm font-medium text-black">
+                English (Professional)
+              </span>
+              <span className="rounded-full bg-white px-3 py-1 text-sm font-medium text-black">
+                Spanish (Intermediate)
+              </span>
             </div>
           </div>
-        ))}
+
+          {Object.entries(ICONS).map(([section, icons]) => (
+            <div key={section}>
+              <h3 className="mt-8 px-3 font-ninna font-semibold text-gray-200">
+                {`My ${section} :`}
+              </h3>
+              <div className="mb-4 mt-2 flex flex-wrap gap-2 px-6">
+                {icons.map(({ src, alt }) => (
+                  <Tooltip key={`${section}-${alt}`} text={alt}>
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                      className="relative size-10"
+                    >
+                      <Image
+                        src={src}
+                        alt={alt}
+                        fill
+                        sizes="(max-width: 640px) 40px, (max-width: 768px) 50px, 40px"
+                        style={{ objectFit: 'contain' }}
+                      />
+                    </motion.div>
+                  </Tooltip>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </motion.div>
     </motion.div>
   );

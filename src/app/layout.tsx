@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />{' '}
         <meta name="robots" content="index, follow" />
         <meta name="author" content="ixilod" />
         <link rel="canonical" href="https://ixilod.com/" />
