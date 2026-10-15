@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <NavigationHandler />
-      <div className="relative h-screen">
+      <div className="fixed inset-0 overflow-hidden bg-[#0a0a0a]">
         <BlobScene />
         <h1 translate="no" className="sr-only">
           IXILOD
