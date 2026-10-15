@@ -26,35 +26,41 @@ export const fragmentShader = `
     vec3 N = normalize(vWorldNormal);
     vec3 V = normalize(vViewDir);
     float ndv = clamp(dot(N, V), 0.0, 1.0);
-    float fresnel = pow(1.0 - ndv, 3.0);
+    float fresnel = pow(1.0 - ndv, 2.4);
 
-    vec3 glassCore = vec3(0.12, 0.78, 0.72);
-    vec3 glassEdge = vec3(0.28, 0.92, 0.86);
+    vec3 liquid = N;
+    liquid.x += sin(vWorldPos.y * 5.0 + uTime * 0.9) * 0.05;
+    liquid.y += cos(vWorldPos.x * 4.5 - uTime * 0.7) * 0.05;
+    liquid = normalize(liquid);
+
+    vec3 glassCore = vec3(0.40, 0.54, 0.56);
+    vec3 glassEdge = vec3(0.70, 0.84, 0.86);
     vec3 absorbed = mix(glassCore, glassEdge, fresnel);
 
-    vec3 L = normalize(vec3(0.45, 0.85, 0.55));
-    vec3 H = normalize(L + V);
-    float spec = pow(max(dot(N, H), 0.0), 96.0);
-    vec3 highlight = vec3(1.0) * spec * 0.55;
-
-    vec3 L2 = normalize(vec3(-0.6, 0.3, 0.7));
+    vec3 L1 = normalize(vec3(0.50, 0.85, 0.45));
+    vec3 L2 = normalize(vec3(-0.65, 0.30, 0.60));
+    vec3 H1 = normalize(L1 + V);
     vec3 H2 = normalize(L2 + V);
-    float spec2 = pow(max(dot(N, H2), 0.0), 48.0);
-    highlight += vec3(0.90, 0.97, 1.0) * spec2 * 0.22;
 
-    float caustic = sin(vWorldPos.x * 8.0 + uTime * 1.4)
-                  * sin(vWorldPos.y * 7.0 - uTime * 1.1)
-                  * sin(vWorldPos.z * 6.0 + uTime * 0.8);
-    caustic = smoothstep(0.35, 0.85, caustic * 0.5 + 0.5);
+    float spec = pow(max(dot(liquid, H1), 0.0), 72.0);
+    float spec2 = pow(max(dot(liquid, H2), 0.0), 36.0);
+    vec3 highlight = vec3(1.0) * spec * 0.70;
+    highlight += vec3(0.88, 0.96, 0.95) * spec2 * 0.22;
 
-    vec3 rim = vec3(0.45, 0.95, 0.90) * fresnel * 0.85;
+    float caustic =
+      sin(vWorldPos.x * 7.0 + uTime * 1.2) *
+      sin(vWorldPos.y * 6.0 - uTime * 0.9) *
+      sin(vWorldPos.z * 5.0 + uTime * 0.7);
+    caustic = smoothstep(0.40, 0.88, caustic * 0.5 + 0.5);
 
-    vec3 color = absorbed * (0.55 + ndv * 0.50);
+    vec3 rim = vec3(0.72, 0.90, 0.88) * fresnel * 0.95;
+
+    vec3 color = absorbed * (0.34 + ndv * 0.44);
     color += rim;
     color += highlight;
-    color += vec3(0.20, 0.90, 0.82) * caustic * 0.12;
+    color += vec3(0.45, 0.78, 0.74) * caustic * 0.08;
 
-    float alpha = mix(0.72, 0.92, fresnel) + spec * 0.15;
-    gl_FragColor = vec4(color, clamp(alpha, 0.68, 0.96));
+    float alpha = mix(0.64, 0.90, fresnel) + spec * 0.10;
+    gl_FragColor = vec4(color, clamp(alpha, 0.58, 0.94));
   }
 `;
