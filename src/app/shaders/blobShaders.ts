@@ -33,8 +33,8 @@ export const fragmentShader = `
     liquid.y += cos(vWorldPos.x * 4.5 - uTime * 0.7) * 0.05;
     liquid = normalize(liquid);
 
-    vec3 glassCore = vec3(0.75, 0.90, 0.95);
-    vec3 glassEdge = vec3(0.70, 0.84, 0.86);
+    vec3 glassCore = vec3(0.10, 0.15, 0.15);
+    vec3 glassEdge = vec3(0.10, 0.84, 0.86);
     vec3 absorbed = mix(glassCore, glassEdge, fresnel);
 
     vec3 L1 = normalize(vec3(0.50, 0.85, 0.45));
