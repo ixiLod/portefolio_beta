@@ -1,9 +1,9 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Sphere } from '@react-three/drei';
-import { Mesh, ShaderMaterial } from 'three';
+import { Icosahedron } from '@react-three/drei';
+import { Mesh, ShaderMaterial, MathUtils } from 'three';
 import { vertexShader, fragmentShader } from '@/app/shaders/blobShaders';
 
 interface BlobProps {
@@ -12,112 +12,99 @@ interface BlobProps {
   isAudioReactive: boolean;
 }
 
+const BASE_AMPLITUDE = 0.05; // Léger relief organique constant
+const BASE_FREQUENCY = 1.6; // Fréquence légèrement plus riche (moins lisse)
+
 const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
   const meshRef = useRef<Mesh>(null!);
-  const initialPositions = useRef<Float32Array | null>(null);
-  const freqData = useRef(new Uint8Array(128));
-  const [amplitude, setAmplitude] = useState(0.02);
-  const [frequency, setFrequency] = useState(4);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const materialRef = useRef<ShaderMaterial>(null!);
+  const freqData = useRef<Uint8Array | null>(null);
 
-  useEffect(() => {
-    let interval: ReturnType<typeof setInterval> | undefined;
-    if (isAnimating) {
-      interval = setInterval(() => {
-        setAmplitude((prev) => prev + (0.02 - prev) * 0.1);
-        setFrequency((prev) => prev + (4 - prev) * 0.1);
-      }, 16);
-    }
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [isAnimating]);
+  const state = useRef({
+    smoothBass: 0,
+    smoothMids: 0,
+    timeAcc: 0, // Compteur de temps modulé par l'audio
+    clickPos: 0,
+    clickVel: 0,
+    clickWave: 0,
+  });
 
-  const prevBassStrength = useRef(0);
-  const prevMidStrength = useRef(0);
+  const uniforms = useMemo(
+    () => ({
+      uTime: { value: 10 },
+      uBass: { value: 0 },
+      uMids: { value: 0 },
+      uClickSpring: { value: 0 },
+      uClickWave: { value: 0 },
+    }),
+    [],
+  );
 
   useFrame((_, delta) => {
-    if (!meshRef.current) return;
+    if (!materialRef.current) return;
+    const dt = Math.min(delta, 0.05);
+    const s = state.current;
 
-    const material = meshRef.current.material as ShaderMaterial;
-    if (material.uniforms?.uTime) {
-      if (material.uniforms.uTime.value === 0) {
-        material.uniforms.uTime.value = 10;
-      }
-
-      material.uniforms.uTime.value += delta * 0.9;
-    }
-
-    const geometry = meshRef.current.geometry;
-    const positionArray = geometry.attributes.position.array as Float32Array;
-
-    if (!initialPositions.current) {
-      initialPositions.current = new Float32Array(positionArray);
-    }
-
-    let dynamicAmplitude = amplitude;
-    let dynamicFrequency = frequency;
+    let rawBass = 0;
+    let rawMids = 0;
 
     if (isAudioReactive && analyser) {
-      if (freqData.current.length !== analyser.frequencyBinCount) {
+      if (!freqData.current || freqData.current.length !== analyser.frequencyBinCount) {
         freqData.current = new Uint8Array(analyser.frequencyBinCount);
       }
-
       analyser.getByteFrequencyData(freqData.current);
-      const dataArray = freqData.current;
 
-      const bass = dataArray.slice(0, 10).reduce((a, b) => a + b, 0) / 10;
-      const mids = dataArray.slice(10, 50).reduce((a, b) => a + b, 0) / 40;
+      let bassSum = 0;
+      for (let i = 0; i < 10; i++) bassSum += freqData.current[i];
+      rawBass = bassSum / 10 / 255;
 
-      const smoothedBass = prevBassStrength.current * 0.9 + bass * 0.1;
-      const smoothedMids = prevMidStrength.current * 0.9 + mids * 0.1;
-
-      prevBassStrength.current = smoothedBass;
-      prevMidStrength.current = smoothedMids;
-
-      dynamicAmplitude += smoothedBass * 0.0003;
-      dynamicFrequency += smoothedMids * 0.001;
+      let midsSum = 0;
+      for (let i = 10; i < 45; i++) midsSum += freqData.current[i];
+      rawMids = midsSum / 35 / 255;
     }
 
-    const time = material.uniforms.uTime.value;
+    // Lissage ultra-propre (EMA) pour éviter toute saccade sur les vitesses
+    const targetBass = Math.min(1.0, Math.pow(rawBass, 1.3) * 1.5);
+    const targetMids = Math.min(1.0, Math.pow(rawMids, 1.2) * 1.4);
 
-    for (let i = 0; i < positionArray.length; i += 3) {
-      const x = initialPositions.current[i];
-      const y = initialPositions.current[i + 1];
-      const z = initialPositions.current[i + 2];
-      const len = Math.sqrt(x * x + y * y + z * z) || 1;
+    const bassRate = targetBass > s.smoothBass ? 20 : 5;
+    const midsRate = targetMids > s.smoothMids ? 15 : 5;
 
-      const offset =
-        Math.sin(time * dynamicFrequency + x * 3) * dynamicAmplitude * 0.5 +
-        Math.sin(time * dynamicFrequency + y * 3) * dynamicAmplitude * 0.5 +
-        Math.sin(time * dynamicFrequency + z * 3) * dynamicAmplitude * 0.5;
+    s.smoothBass = MathUtils.lerp(s.smoothBass, targetBass, 1 - Math.exp(-bassRate * dt));
+    s.smoothMids = MathUtils.lerp(s.smoothMids, targetMids, 1 - Math.exp(-midsRate * dt));
 
-      positionArray[i] = x + (x / len) * offset;
-      positionArray[i + 1] = y + (y / len) * offset;
-      positionArray[i + 2] = z + (z / len) * offset;
-    }
+    // Physique du clic (rebond souple)
+    const stiffness = 60;
+    const damping = 5.0;
+    const springForce = -stiffness * s.clickPos - damping * s.clickVel;
+    s.clickVel += springForce * dt;
+    s.clickPos += s.clickVel * dt;
+    s.clickWave = MathUtils.lerp(s.clickWave, 0, 1 - Math.exp(-2.5 * dt));
 
-    geometry.attributes.position.needsUpdate = true;
+    const u = materialRef.current.uniforms;
+
+    // --- LE CŒUR DE L'IDÉE : La vitesse du temps réagit au son ---
+    // Au repos, le temps avance paisiblement (0.55). Quand la musique tape, la vitesse s'accélère en cadence (jusqu'à x2.5).
+    const speedMultiplier = 0.55 + s.smoothBass * 1.4 + s.smoothMids * 0.55 + s.clickWave * 1.2;
+    s.timeAcc += dt * speedMultiplier;
+    u.uTime.value = s.timeAcc;
+
+    u.uBass.value = s.smoothBass;
+    u.uMids.value = s.smoothMids;
+    u.uClickSpring.value = s.clickPos;
+    u.uClickWave.value = s.clickWave;
   });
 
   const handleClick = () => {
-    if (isAnimating) return;
-
-    setIsAnimating(true);
-    setAmplitude(0.08);
-    setFrequency(5);
-    setTimeout(() => {
-      setAmplitude(0.02);
-      setFrequency(4);
-      setIsAnimating(false);
-    }, 350);
-
+    state.current.clickVel = 3.0;
+    state.current.clickPos = 0.28;
+    state.current.clickWave = 1.0;
     onClick();
   };
 
   return (
-    <Sphere
-      args={[0.5, 64, 64]}
+    <Icosahedron
+      args={[0.5, 64]}
       ref={meshRef}
       position={[0, 0, 0]}
       onClick={handleClick}
@@ -131,15 +118,15 @@ const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
       }}
     >
       <shaderMaterial
+        ref={materialRef}
         attach="material"
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
-        uniforms={{ uTime: { value: 0 } }}
+        uniforms={uniforms}
         transparent
         depthWrite={false}
-        wireframe={false}
       />
-    </Sphere>
+    </Icosahedron>
   );
 };
 
