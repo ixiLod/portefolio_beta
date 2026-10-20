@@ -14,7 +14,7 @@ export default function Home() {
         </h1>
         <div
           aria-hidden="true"
-          className="title-container pointer-events-none fixed left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 font-ninna text-6xl text-gray-300 md:text-7xl"
+          className="title-container pointer-events-none fixed left-1/2 top-4 z-20 flex h-12 -translate-x-1/2 items-center font-ninna text-4xl text-gray-300 md:text-5xl"
         >
           IXILOD
         </div>

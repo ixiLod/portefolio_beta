@@ -101,6 +101,14 @@ const BlobScene = () => {
     }
   }, [activeModal]);
 
+  useEffect(() => {
+    if (isSidebarVisible) {
+      document.body.setAttribute('data-menu', 'open');
+    } else {
+      document.body.removeAttribute('data-menu');
+    }
+  }, [isSidebarVisible]);
+
   const handleBlobClick = () => {
     setShowPulseAnimation(false);
     setSidebarVisible((prev) => !prev);

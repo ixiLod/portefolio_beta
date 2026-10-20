@@ -42,3 +42,8 @@ body {
 body[data-modal='creations'] .title-container {
   opacity: 0;
 }
+
+body[data-menu='open'] .title-container,
+body[data-modal='creations'] .title-container {
+  opacity: 0;
+}
