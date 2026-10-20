@@ -15,39 +15,37 @@ interface BlobProps {
 const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
   const meshRef = useRef<Mesh>(null!);
   const initialPositions = useRef<Float32Array | null>(null);
+  const freqData = useRef(new Uint8Array(128));
   const [amplitude, setAmplitude] = useState(0.02);
   const [frequency, setFrequency] = useState(4);
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval> | undefined;
     if (isAnimating) {
       interval = setInterval(() => {
         setAmplitude((prev) => prev + (0.02 - prev) * 0.1);
         setFrequency((prev) => prev + (4 - prev) * 0.1);
       }, 16);
     }
-    return () => clearInterval(interval);
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, [isAnimating]);
 
   const prevBassStrength = useRef(0);
   const prevMidStrength = useRef(0);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (!meshRef.current) return;
 
     const material = meshRef.current.material as ShaderMaterial;
-    if (material.uniforms) {
+    if (material.uniforms?.uTime) {
       if (material.uniforms.uTime.value === 0) {
         material.uniforms.uTime.value = 10;
       }
 
-      const speed = 0.9;
-      material.uniforms.uTime.value += delta * speed;
-
-      if (material.uniforms.uTime.value >= 60) {
-        material.uniforms.uTime.value = 10;
-      }
+      material.uniforms.uTime.value += delta * 0.9;
     }
 
     const geometry = meshRef.current.geometry;
@@ -61,8 +59,12 @@ const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
     let dynamicFrequency = frequency;
 
     if (isAudioReactive && analyser) {
-      const dataArray = new Uint8Array(analyser.frequencyBinCount);
-      analyser.getByteFrequencyData(dataArray);
+      if (freqData.current.length !== analyser.frequencyBinCount) {
+        freqData.current = new Uint8Array(analyser.frequencyBinCount);
+      }
+
+      analyser.getByteFrequencyData(freqData.current);
+      const dataArray = freqData.current;
 
       const bass = dataArray.slice(0, 10).reduce((a, b) => a + b, 0) / 10;
       const mids = dataArray.slice(10, 50).reduce((a, b) => a + b, 0) / 40;
@@ -77,23 +79,22 @@ const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
       dynamicFrequency += smoothedMids * 0.001;
     }
 
+    const time = material.uniforms.uTime.value;
+
     for (let i = 0; i < positionArray.length; i += 3) {
       const x = initialPositions.current[i];
       const y = initialPositions.current[i + 1];
       const z = initialPositions.current[i + 2];
+      const len = Math.sqrt(x * x + y * y + z * z) || 1;
 
       const offset =
-        Math.sin(material.uniforms.uTime.value * dynamicFrequency + x * 3) *
-          dynamicAmplitude *
-          0.5 +
-        Math.sin(material.uniforms.uTime.value * dynamicFrequency + y * 3) *
-          dynamicAmplitude *
-          0.5 +
-        Math.sin(material.uniforms.uTime.value * dynamicFrequency + z * 3) * dynamicAmplitude * 0.5;
+        Math.sin(time * dynamicFrequency + x * 3) * dynamicAmplitude * 0.5 +
+        Math.sin(time * dynamicFrequency + y * 3) * dynamicAmplitude * 0.5 +
+        Math.sin(time * dynamicFrequency + z * 3) * dynamicAmplitude * 0.5;
 
-      positionArray[i] = x + (x / Math.sqrt(x * x + y * y + z * z)) * offset;
-      positionArray[i + 1] = y + (y / Math.sqrt(x * x + y * y + z * z)) * offset;
-      positionArray[i + 2] = z + (z / Math.sqrt(x * x + y * y + z * z)) * offset;
+      positionArray[i] = x + (x / len) * offset;
+      positionArray[i + 1] = y + (y / len) * offset;
+      positionArray[i + 2] = z + (z / len) * offset;
     }
 
     geometry.attributes.position.needsUpdate = true;
