@@ -94,8 +94,8 @@ const BlobScene = () => {
   }, []);
 
   useEffect(() => {
-    if (activeModal === 'creations') {
-      document.body.setAttribute('data-modal', 'creations');
+    if (activeModal === 'creations' || activeModal === 'networks') {
+      document.body.setAttribute('data-modal', activeModal);
     } else {
       document.body.removeAttribute('data-modal');
     }
