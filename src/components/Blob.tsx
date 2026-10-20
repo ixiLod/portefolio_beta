@@ -12,9 +12,6 @@ interface BlobProps {
   isAudioReactive: boolean;
 }
 
-const BASE_AMPLITUDE = 0.05; // Léger relief organique constant
-const BASE_FREQUENCY = 1.6; // Fréquence légèrement plus riche (moins lisse)
-
 const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
   const meshRef = useRef<Mesh>(null!);
   const materialRef = useRef<ShaderMaterial>(null!);
@@ -23,7 +20,7 @@ const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
   const state = useRef({
     smoothBass: 0,
     smoothMids: 0,
-    timeAcc: 0, // Compteur de temps modulé par l'audio
+    timeAcc: 0,
     clickPos: 0,
     clickVel: 0,
     clickWave: 0,
@@ -63,7 +60,6 @@ const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
       rawMids = midsSum / 35 / 255;
     }
 
-    // Lissage ultra-propre (EMA) pour éviter toute saccade sur les vitesses
     const targetBass = Math.min(1.0, Math.pow(rawBass, 1.3) * 1.5);
     const targetMids = Math.min(1.0, Math.pow(rawMids, 1.2) * 1.4);
 
@@ -73,7 +69,6 @@ const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
     s.smoothBass = MathUtils.lerp(s.smoothBass, targetBass, 1 - Math.exp(-bassRate * dt));
     s.smoothMids = MathUtils.lerp(s.smoothMids, targetMids, 1 - Math.exp(-midsRate * dt));
 
-    // Physique du clic (rebond souple)
     const stiffness = 60;
     const damping = 5.0;
     const springForce = -stiffness * s.clickPos - damping * s.clickVel;
@@ -83,8 +78,6 @@ const Blob = ({ onClick, analyser, isAudioReactive }: BlobProps) => {
 
     const u = materialRef.current.uniforms;
 
-    // --- LE CŒUR DE L'IDÉE : La vitesse du temps réagit au son ---
-    // Au repos, le temps avance paisiblement (0.55). Quand la musique tape, la vitesse s'accélère en cadence (jusqu'à x2.5).
     const speedMultiplier = 0.55 + s.smoothBass * 1.4 + s.smoothMids * 0.55 + s.clickWave * 1.2;
     s.timeAcc += dt * speedMultiplier;
     u.uTime.value = s.timeAcc;
